@@ -1,0 +1,97 @@
+body{
+    background-image: url(../images/Logo2.png);
+    
+    background-position: center center;
+
+    /* Para que la imagen de fondo no se repita */
+
+    background-repeat: no-repeat;
+
+    /* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
+
+    background-attachment: fixed;
+
+    /* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
+
+    background-size: cover;
+
+    /* Se muestra un color de fondo mientras se está cargando la imagen
+
+    de fondo o si hay problemas para cargarla */
+
+    background-color: #6699;
+
+
+}
+
+#content{
+    background-image: url(../images/Logo2.png);
+    
+    background-position: center center;
+
+    /* Para que la imagen de fondo no se repita */
+
+    background-repeat: no-repeat;
+
+    /* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
+
+    background-attachment: fixed;
+
+    /* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
+
+    background-size: cover;
+
+    /* Se muestra un color de fondo mientras se está cargando la imagen
+
+    de fondo o si hay problemas para cargarla */
+
+    background-color: #6699;
+
+}
+
+#head_form{
+    background: #36b9cc;
+    
+}
+
+h3{
+    color: white;
+}
+
+#body_form{
+    background: #dddfeb;
+}
+
+#button_form{
+    background: #4e73df;
+}
+
+label{
+    color: black;
+}
+
+/* encabezado de la tabla */
+thead{
+    background:   #25799e ;
+} 
+
+/* filas de la tabla */
+td{
+    color: black;
+}
+
+/* filas del encabezado */
+th{
+    color: black;
+}
+
+#accordionSidebar{
+
+    background: #36b9cc;
+
+}
+
+/* menu horizontal del layouts */
+#menu_horizontal{
+    background:   #25799e ;
+}
