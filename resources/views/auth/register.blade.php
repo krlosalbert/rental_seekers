@@ -123,9 +123,8 @@
                             </div>
 
                         </div>
-
-                        <div class="row mb-0">
-                            <div>
+                        <div class="d-flex w-auto">
+                            <div class="p-3">
                                 <button type="submit" class="btn btn-primary">
                                    <b> {{ __('Guardar') }} </b>
                                 </button>

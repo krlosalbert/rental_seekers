@@ -22,4 +22,10 @@ class advisors extends Model
         'porcentage_id',
         'supervisor_id',
     ];
+
+    //definir la relación con la tabla principal
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

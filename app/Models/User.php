@@ -45,4 +45,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //definir la relación con la tabla secundaria
+    public function advisors()
+    {
+        return $this->hasOne(advisors::class, 'user_id');
+    }
 }

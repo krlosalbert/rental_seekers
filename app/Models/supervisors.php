@@ -21,4 +21,6 @@ class supervisors extends Model
         'user_id',
         'porcentage_id',
     ];
+
+
 }

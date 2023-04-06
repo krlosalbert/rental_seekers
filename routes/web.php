@@ -12,18 +12,25 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //USUARIOS
 //ruta para ver los usuarios registrados
 Route::get('/view_users','App\Http\Controllers\usersController@read')->name('view_users');
+//ruta para ver los usuarios registrados detallados
+Route::post('/details_users','App\Http\Controllers\usersController@details')->name('details_users');
 //ruta para el formulario de registro de usuarios
 Route::get('/form_users','App\Http\Controllers\usersController@form')->name('form_users');
 //ruta para registrar usuarios
-Route::get('/register', 'App\Http\Controllers\adminRegistrationController@showRegistrationForm');
 Route::post('/register', 'App\Http\Controllers\adminRegistrationController@store')->name('register')->middleware('auth');
 //ruta para el formulario de edicion de usuarios
-Route::get('/ReadUpdate/{id}','App\Http\Controllers\UserController@ReadUpdate')->name('ReadUpdate');
+Route::get('/form_update_users','App\Http\Controllers\usersController@read_update')->name('form_update_users');
 //ruta para editar a los usuarios
-Route::put('/Update/{id}','App\Http\Controllers\UserController@Update')->name('Update');
+Route::put('/update_users/{id}','App\Http\Controllers\usersController@update')->name('update_users');
 //ruta para eliminar usuarios
-Route::delete('DeleteUsers/{id}','App\Http\Controllers\UserController@destroy')->name('DeleteUsers.destroy');
+Route::delete('delete_users/{id}','App\Http\Controllers\usersController@destroy')->name('delete_users');
 
+//ROLES
+//ruta para ver los roles registrados
+Route::get('/view_roles','App\Http\Controllers\rolesController@read')->name('view_roles');
+//ruta para el formulario de registro de usuarios
+Route::get('/form_roles','App\Http\Controllers\rolesController@form')->name('form_roles');
+Route::post('/create_roles', 'App\Http\Controllers\rolesController@create')->name('create_roles');
 
 //supervisors
 Route::get('/view_supervisors', [App\Http\Controllers\supervisorsController::class, 'read'])->name('view_supervisors');

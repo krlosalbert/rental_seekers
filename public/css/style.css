@@ -48,24 +48,24 @@ body{
     background-color: #6699;
 
 }
-
+/* encabezado de los formularios */
 #head_form{
     background: #36b9cc;
     
 }
-
+/* color de letra de los titulos primarios */
+h1{
+    color: #25799e;
+}
+/* color de letra de los titulos secundarios */
 h3{
     color: white;
 }
-
+/* cuerpo de los formularios */
 #body_form{
     background: #dddfeb;
 }
-
-#button_form{
-    background: #4e73df;
-}
-
+/* color a los nombres de los inputs de los formularios */
 label{
     color: black;
 }
@@ -84,7 +84,7 @@ td{
 th{
     color: black;
 }
-
+/* fondo menu vertical */
 #accordionSidebar{
 
     background: #36b9cc;
@@ -94,4 +94,83 @@ th{
 /* menu horizontal del layouts */
 #menu_horizontal{
     background:   #25799e ;
+}
+
+/* quitar el contenido del atributo after */
+.nav-link::after {
+    content: none;
+    display: none;
+}
+
+/* quitarle las mayusculas al titulo */
+.sidebar-brand-text {
+    text-transform: none;
+    font-size: 0.9rem; 
+}
+
+/* ajustarle el tamaño al logo */
+.sidebar-brand-icon{
+    width: 80px;
+    height: 40px;
+    padding-top: 0px;
+}
+
+/* colocarle color al boton primary de bootstrap cuando se le acerca el mouse */
+.btn.btn-primary:hover {
+    background-color: #04b5c2;
+    border-color: #04b5c2;
+}
+
+/* colocarle color al boton primary de bootstrap */
+.btn.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* colocarle color al boton secondary de bootstrap cuando se le acerca el mouse */
+.btn.btn-secondary:hover {
+    background-color:  #a09f9f;
+    border-color:  #a09f9f;;
+}
+
+/* colocarle color al boton secondary de bootstrap */
+.btn.btn-secondary {
+    background-color:  #808080;
+    border-color:  #808080;
+}
+
+/* colocarle color al boton success de bootstrap cuando se le acerca el mouse */
+.btn.btn-success:hover {
+    background-color: #7ff07f;
+    border-color: #7ff07f;
+}
+
+/* colocarle color al boton success de bootstrap */
+.btn.btn-success {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+
+/* colocarle color al boton warning de bootstrap cuando se le acerca el mouse */
+.btn.btn-warning:hover {
+    background-color: #f0be79;
+    border-color:  #f0be79;
+}
+
+/* colocarle color al boton warning de bootstrap */
+.btn.btn-warning {
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+/* colocarle color al boton danger de bootstrap cuando se le acerca el mouse */
+.btn.btn-danger:hover {
+    background-color: #fa6863;
+    border-color:  #fa6863;
+}
+
+/* colocarle color al boton danger de bootstrap */
+.btn.btn-danger {
+    background-color: #d9534f;
+    border-color: #d9534f;
 }
