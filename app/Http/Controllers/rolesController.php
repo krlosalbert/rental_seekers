@@ -37,4 +37,40 @@ class rolesController extends Controller
         // Redireccionar a la vista de roles
         return redirect()->route('view_roles')->with('success', 'Rol Guardado  con exito');
     }
+
+    /* metodo para actualizar un rol */
+    public function read_update(Request $request)
+    {
+        $roles = roles::select('*', 'roles.id as role_id')
+        ->where('roles.id', '=', $request->id)
+        ->get();
+    
+        return view('roles.update', compact('roles'));
+    }
+
+    /* metodo para actualizar un rol */
+    public function update(Request $request, $id)
+    {
+        $role = roles::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+    
+        $role->fill($validatedData);
+        $role->save();
+        return redirect()->route('view_roles')->with('update', 'Rol actualizado con exito');
+    }
+
+    /* metodo para eliminar los usuarios */
+    public function destroy($id){
+        $role = roles::findOrFail($id);
+        //pregunto su fue exitoso la eliminacion
+        if ($role->delete()) {
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false]);
+
+    }
 }
+

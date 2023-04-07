@@ -77,6 +77,7 @@ class usersController extends Controller
         return redirect()->route('view_users')->with('done', 'Usuario Actualizado con exito');
     }
 
+    /* metodo para eliminar los usuarios */
     public function destroy($id){
         $user = User::findOrFail($id);
         //eliminar el registro relacionado de la tabla secundaria

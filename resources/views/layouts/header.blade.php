@@ -12,11 +12,10 @@
     <title>Buscadores de arriendos</title>
 
     <!-- Custom fonts for this template-->
-<!--<link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css"> -->
     <link href="{{ asset('css/fonts_nunito.css') }}"  rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-1.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- script para desplegar los menus -->
@@ -294,7 +293,7 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar sesion') }}
-                                </a>
+                                    </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -334,7 +333,7 @@
     <!-- End of Page Wrapper -->
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-1.min.js') }}"></script>
 
     @yield('js')
 </body>

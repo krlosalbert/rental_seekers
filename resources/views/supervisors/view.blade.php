@@ -9,12 +9,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header" id="head_form">
-                    <h3 class="modal-title" id="myModalLabel">{{ __('Supervisores') }}
-                        <!-- Button trigger modal paara editar -->
-                        <a href="{{ route('form_supervisors') }}" type="button" id="insert" class="btn btn-secondary" data-toggle="" data-target="#exampleModal">
-                            Agregar
-                        </a>
-                    <h3>
+                    <h3 class="modal-title" id="myModalLabel">{{ __('Supervisores') }} <h3>
+                    <!-- Button trigger modal paara editar -->
+                    <a href="{{ route('form_supervisors') }}" type="button" id="insert" class="btn btn-secondary" data-toggle="" data-target="#exampleModal">
+                        Nuevo
+                    </a>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body" id="body_form">
@@ -60,22 +59,21 @@
                         @endforeach      
                     </table>
                     <div>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <script>
-                $(document).ready(function() {
-                    // Llamamos al botón del modal y le hacemos clic automáticamente
-                    $('#btn-view_supervisors').trigger('click');
-                });
-            </script>
-            @if(session('success'))
-                <script>
-                    swal("Listo!", "Supervisor Guardado con Exito!", "success")
-                        .then((value) => {
-                    }) 
-                </script>
-            @endif
-
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            // Llamamos al botón del modal y le hacemos clic automáticamente
+            $('#btn-view_supervisors').trigger('click');
+        });
+    </script>
+    @if(session('success'))
+        <script>
+            swal("Listo!", "Supervisor Guardado con Exito!", "success")
+                .then((value) => {
+            }) 
+        </script>
+    @endif
 @endsection
