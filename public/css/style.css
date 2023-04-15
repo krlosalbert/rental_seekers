@@ -174,3 +174,8 @@ th{
     background-color: #d9534f;
     border-color: #d9534f;
 }
+
+/* estilo para la tabla vacia de datatables */
+.dataTables_empty {
+    text-align: center;
+ }

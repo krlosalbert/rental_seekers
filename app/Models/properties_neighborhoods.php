@@ -18,7 +18,21 @@ class properties_neighborhoods extends Model
      */
     protected $fillable = [
         'property_id',
-        'neighborhood',
+        'neighborhood_id',
+        'number_rooms',
+        'parking',
 
     ];
+
+    //definir la relación con la tabla principal
+    public function properties()
+    {
+        return $this->belongsTo(properties::class, 'property_id');
+    }
+
+    //definir la relación con la tabla principal
+    public function neighborhoods()
+    {
+        return $this->belongsTo(neighborhoods::class, 'neighborhood_id');
+    }
 }

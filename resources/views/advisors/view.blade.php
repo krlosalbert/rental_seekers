@@ -1,19 +1,23 @@
 @extends('layouts.header')
 
+@section('css')
+    <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     <!-- Botón que activa el modal (lo puedes ocultar con CSS si no quieres mostrarlo) -->
     <button type="button" id="btn-view_advisors" data-toggle="modal" data-target="#modal-view_advisors" style="display: none;"></button>
 
     <!-- Modal -->
     <div class="modal fade" id="modal-view_advisors" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" id="head_form">
                     <h3 class="modal-title" id="myModalLabel">{{ __('Asesores') }} <h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body" id="body_form">
-                    <table class="table">
+                    <table class="table" id="tbl-advisors">
                         <thead class="">
                             <tr>
                                 <th class="text-center" scope="col">#</th>
@@ -53,11 +57,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-body" id="body">
 
-
-
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrapDatatables.js') }}"></script>
     <script src=" {{ asset('js/advisors/advisors.js') }} "></script>
     @if(session('success'))
         <script>

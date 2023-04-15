@@ -10,7 +10,7 @@
             <div class="card-header" id="head_form">
                 <h3>Usuarios<h3>
             </div>
-            <table class="table">
+            <table class="table" id="tbl-users">
                 <thead>
                     <tr>
                         <th class="text-center" scope="col">#</th>
@@ -88,12 +88,12 @@
             </div>
             <!-- Aqui empiezan los scripts -->
             @section('js')
-<!--                 <script src="{{ asset('js/datatables.min.js') }}"></script>
+                <script src="{{ asset('js/datatables.min.js') }}"></script>
                 <script src="{{ asset('js/bootstrapDatatables.js') }}"></script> -->
                 <script src="{{ asset('js/users/users.js') }}"></script>
-               <!--  <script>
+                <script>
                         $(document).ready(function () {
-                            $('#users').DataTable({
+                            $('#tbl-users').DataTable({
                                 'lengthMenu' : [[ 3, 6, 9, -1], [ 3, 6, 9, "All"]],
                                 'pageLength': 3,
                                 'language': { 
@@ -107,7 +107,7 @@
                                 }
                             });
                         });
-                </script> -->
+                </script>
                 @if(session('success'))
                     <script>
                         swal("Listo!", "Usuario Guardado con Exito!", "success")

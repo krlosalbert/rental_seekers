@@ -13,10 +13,20 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
+            $table->date('date');
+            $table->float('number_rooms');
+            $table->float('parking');
             $table->float('canon');
-            $table->bigInteger('costumber_id')->unsigned();
-            $table->bigInteger('property_neighborhood_id')->unsigned();
+            $table->float('referencia');
+            $table->float('comprobante');
+            $table->float('terminos');
+            $table->bigInteger('customer_id')->unsigned();
+            $table->bigInteger('city_id')->unsigned();
+            $table->bigInteger('neighborhood_id')->unsigned();
+            $table->bigInteger('property_id')->unsigned();
+            $table->bigInteger('advisor_id')->unsigned();
+            $table->bigInteger('account_id')->unsigned();
+            $table->bigInteger('service_id')->unsigned();
             $table->timestamps();
         });
     }

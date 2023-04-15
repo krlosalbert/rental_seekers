@@ -25,3 +25,22 @@ $(document).ready(function() {
         });
     });
 });
+
+//funcion de la datatables
+$(document).ready(function () {
+    $('#tbl-advisors').DataTable({
+        'lengthMenu' : [[ 3, 6, 9, -1], [ 3, 6, 9, "All"]],
+        'pageLength': 3,
+        'language': { 
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            },
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "search": "Buscar:",
+            "emptyTable": "No hay datos disponibles en la tabla",
+            "infoEmpty": "Mostrando 0 a 0 de 0 registros"
+        }
+    });
+});

@@ -22,4 +22,10 @@ class neighborhoods extends Model
         'city_id',
 
     ];
+
+    //definir la relación con la tabla secundaria
+    public function properties_neighborhoods()
+    {
+        return $this->hasMany(properties_neighborhoods::class, 'neighborhood_id');
+    }
 }

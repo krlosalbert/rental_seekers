@@ -19,11 +19,14 @@ class properties extends Model
      */
     protected $fillable = [
         'name',
-        'number_rooms',
-        'parking',
 
     ];
 
+    //definir la relación con la tabla secundaria
+    public function properties_neighborhoods()
+    {
+        return $this->hasMany(properties_neighborhoods::class, 'property_id');
+    }
 
 
 }

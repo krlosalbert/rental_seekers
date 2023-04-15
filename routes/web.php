@@ -39,16 +39,53 @@ Route::put('/update_roles/{id}','App\Http\Controllers\rolesController@update')->
 //ruta para eliminar los roles
 Route::delete('delete_roles/{id}','App\Http\Controllers\rolesController@destroy')->name('delete_roles');
 
-//supervisors
+//SUPERVISORES
 Route::get('/view_supervisors', [App\Http\Controllers\supervisorsController::class, 'read'])->name('view_supervisors');
 Route::get('/form_supervisors', [App\Http\Controllers\supervisorsController::class, 'form'])->name('form_supervisors');
 Route::post('/create_supervisor', [App\Http\Controllers\supervisorsController::class, 'create'])->name('create_supervisor');
 
-//advisors
+//ASESORES
 //rura para ver los asesores
 Route::get('/view_advisors', [App\Http\Controllers\advisorsController::class, 'read'])->name('view_advisors');
 //ruta para el formulario de edicion de roles
 Route::post('/supervisor_advisor','App\Http\Controllers\advisorsController@supervisor_advisor')->name('supervisor_advisor');
 
-//sales
-Route::get('/form_sales', [App\Http\Controllers\salesController::class, 'form'])->name('form_sales');
+//VENTAS
+//ruta para ver las ventas registradas en la db 
+Route::get('/view_sales', [App\Http\Controllers\salesController::class, 'view'])->name('view_sales');
+//ruta para ve detalle de la venta
+Route::post('/details_sales', [App\Http\Controllers\salesController::class, 'details_sales'])->name('details_sales');
+
+
+//ruta para el formulario de creacion de ventas
+    //ruta para formulario de ventas si el cliente no esta registrado en la db 
+    Route::get('/form_sales', [App\Http\Controllers\salesController::class, 'form'])->name('form_sales');
+    //ruta para formulario de ventas si el cliente esta registrado
+    Route::post('/form_sales', [App\Http\Controllers\salesController::class, 'form'])->name('form_sales');
+    //ruta para obtener los barrios dependiendo de la ciudad
+    Route::post('/get-neighborhoods', 'App\Http\Controllers\salesController@get_neighborhoods')->name('get-neighborhoods');
+    //ruta para obtener los inmuebles dependiendo del barrio
+    Route::post('/get_property', 'App\Http\Controllers\salesController@get_property')->name('get_property');
+    //ruta para obtener los asesores dependiendo del supervisor
+    Route::post('/get-advisors', 'App\Http\Controllers\salesController@get_advisors');
+    //ruta para obtener la cuenta dependiendo del banco
+    Route::post('/get-accounts', 'App\Http\Controllers\salesController@get_accounts');
+//fin de las rutas
+
+//ruta para crear una nueva venta
+Route::post('/create_sales', [App\Http\Controllers\salesController::class, 'create'])->name('create_sales');
+//ruta para eliminar las ventas
+Route::delete('/delete_sales/{id}', 'App\Http\Controllers\salesController@destroy')->name('delete_sales');
+
+
+//CLIENTES
+//ruta para el formulario de buscar cliente en la db
+Route::get('/form_customers', [App\Http\Controllers\customersController::class, 'form'])->name('form_customers');
+//ruta para buscar los clientes en la db
+Route::post('/search_customers','App\Http\Controllers\customersController@search_customers')->name('search_customers');
+//ruta para elegir el cliente y mandarlo al formulario de ventas
+Route::post('/choose_customers','App\Http\Controllers\customersController@choose_customers')->name('choose_customers');
+
+//BANCOS
+//ruta para ver los bancos registrados en la db
+Route::get('/view_banks', 'App\Http\Controllers\banksController@view')->name('view_banks');
