@@ -5,8 +5,6 @@ $(document).ready(function() {
         var variables = datosBoton.split("_");//separarlos en un array
         var id = variables[0];
         var service = variables[1];
-        console.log(id);
-        console.log(service);
 
         $.ajaxSetup({
             headers: {

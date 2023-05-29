@@ -21,7 +21,7 @@ class rolesController extends Controller
         return view('roles.form');
     }
 
-    /* metodo para insertar en la db el nuevo supervisor */
+    /* metodo para insertar en la db el nuevo rol */
     protected function create(Request $request)
     {
         
@@ -29,7 +29,7 @@ class rolesController extends Controller
             'name' => ['required', 'string'],
         ]);
     
-        // Crear un nuevo supervisor
+        // Crear un nuevo rol
         $role = roles::create([
             'name' => $roles['name'],
         ]);
@@ -62,7 +62,7 @@ class rolesController extends Controller
         return redirect()->route('view_roles')->with('update', 'Rol actualizado con exito');
     }
 
-    /* metodo para eliminar los usuarios */
+    /* metodo para eliminar los roles */
     public function destroy($id){
         $role = roles::findOrFail($id);
         //pregunto su fue exitoso la eliminacion

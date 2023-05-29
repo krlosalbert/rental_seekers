@@ -236,7 +236,7 @@ class salesController extends Controller
                     'referencia'      => $sales['referencia'],
                     'comprobante'     => $name_comprobante,
                     'terminos'        => $name_terminos,
-                    'service_id'   => $sales['type_sales']
+                    'service_id'      => $sales['type_sales']
                 ]);
                 
                 // Redireccionar al formulario
@@ -257,7 +257,7 @@ class salesController extends Controller
                         'referencia'    => $sales['referencia'],
                         'comprobante'   => $name_comprobante,
                         'terminos'      => $name_terminos,
-                        'service_id' => $sales['type_sales'],
+                        'service_id'    => $sales['type_sales'],
                     ]);
 
                     // Redireccionar al formulario

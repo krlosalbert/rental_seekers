@@ -1,29 +1,29 @@
 /* inicializar el modal de inicio automaticamente */
 $(document).ready(function() {
     // Llamamos al botón del modal y le hacemos clic automáticamente
-    $('#btn-view_banks').trigger('click');
+    $('#btn-view_accounts').trigger('click');
 });
 
-/* modal para el formulario de nuevo banco */
+/* modal para el formulario de nuevo cuenta */
 $(document).ready(function() {
-    $('.form-banks').click(function() {
+    $('.form-accounts').click(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         $.ajax({
-            url: "/form_banks",
+            url: "/create_accounts",
             success: function(response) {
-                $('#form-banks #body_form').html(response);
+                $('#form-accounts #body_form').html(response);
             }
         });
     });
 });
 
-/* modal para el formulario de edicion del banco seleccionado */
+/* modal para el formulario de edicion de la cuenta seleccionada */
 $(document).ready(function() {
-    $('.form-update-banks').click(function() {
+    $('.form-update-accounts').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
         console.log(id);
         $.ajaxSetup({
@@ -33,16 +33,16 @@ $(document).ready(function() {
         });
         $.ajax({
             type: "post",
-            url: "/form_update_banks",
+            url: "/form_update_accounts",
             data: { id: id },
             success: function(response) {
-                $('#form-update-banks #body_form').html(response);
+                $('#form-update-accounts #body_form').html(response);
             }
         });
     });
 });
 
-/* mensaje de alerta de eliminacion de bancos */
+/* mensaje de alerta de eliminacion de las cuentas */
 $('.btn-delete').click(function (e) {
     e.preventDefault();
     var id = $(this).data('id');
@@ -56,7 +56,7 @@ $('.btn-delete').click(function (e) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Banco Eliminado con Exito!", "success")
+            swal("Listo!", "Cuenta Eliminada con Exito!", "success")
             .then((value) => {
                 $.ajaxSetup({
                     headers: {
@@ -64,13 +64,13 @@ $('.btn-delete').click(function (e) {
                     }
                  });
                 $.ajax({
-                    url: 'delete_banks/' + id,
+                    url: 'delete_accounts/' + id,
                     type: 'DELETE',
                     success: function (data) {
                         if (data.success) {
-                            window.location.replace('/view_banks'); 
+                            window.location.replace('/view_accounts'); 
                         } else {
-                            swal('Error!','El banco no se pudo borrar.','error');
+                            swal('Error!','La cuenta no se pudo borrar.','error');
                         }
                     }
                 });

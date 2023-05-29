@@ -89,3 +89,36 @@ Route::post('/choose_customers','App\Http\Controllers\customersController@choose
 //BANCOS
 //ruta para ver los bancos registrados en la db
 Route::get('/view_banks', 'App\Http\Controllers\banksController@view')->name('view_banks');
+//ruta para el formulario de registro de nuevo banco
+Route::get('/form_banks', 'App\Http\Controllers\banksController@form')->name('form_banks');
+//ruta para la creacion de nuevo banco
+Route::post('/create_banks', 'App\Http\Controllers\banksController@create')->name('create_banks');
+//ruta para el formulario de edicion del banco seleccionado
+Route::post('/form_update_banks', 'App\Http\Controllers\banksController@form_update')->name('form_update_banks');
+//ruta para actualizar los bancos
+Route::put('/update_banks/{id}', 'App\Http\Controllers\banksController@update')->name('update_banks');
+//ruta para eliminar los bancos
+Route::delete('/delete_banks/{id}', 'App\Http\Controllers\banksController@destroy')->name('delete_banks');
+
+//CUENTAS
+//ruta para ver las cuentas registradas en la db
+Route::get('/index_accounts', 'App\Http\Controllers\accountsController@index')->name('index_accounts');
+//ruta para el formulario de registro de nueva cuenta
+Route::get('/create_accounts', 'App\Http\Controllers\accountsController@create')->name('create_accounts');
+//ruta para la creacion de nueva cuenta
+Route::post('/store_accounts', 'App\Http\Controllers\accountsController@store')->name('store_accounts');
+//ruta para el formulario de edicion de la cuenta seleccionada
+Route::post('/form_update_accounts', 'App\Http\Controllers\accountsController@form_update')->name('form_update_accounts');
+//ruta para actualizar las cuentas
+Route::put('/update_accounts/{id}', 'App\Http\Controllers\accountsController@update')->name('update_accounts');
+//ruta para eliminar las cuentas
+Route::delete('/delete_accounts/{id}', 'App\Http\Controllers\accountsController@destroy')->name('delete_accounts');
+
+//INFORMES
+//ruta para ver los informes
+Route::get('/view_informes', 'App\Http\Controllers\informesController@view')->name('view_informes');
+Route::post('/view_informe', 'App\Http\Controllers\informesController@supervisors')->name('view_informe');
+Route::get('/search_supervisor', 'App\Http\Controllers\informesController@search_supervisor');
+Route::post('/search_supervisor', 'App\Http\Controllers\informesController@search_supervisor')->name('search_supervisor');
+
+
