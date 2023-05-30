@@ -102,17 +102,31 @@ Route::delete('/delete_banks/{id}', 'App\Http\Controllers\banksController@destro
 
 //CUENTAS
 //ruta para ver las cuentas registradas en la db
-Route::get('/index_accounts', 'App\Http\Controllers\accountsController@index')->name('index_accounts');
+Route::get('/accounts', 'App\Http\Controllers\accountsController@index')->name('accounts.index');
 //ruta para el formulario de registro de nueva cuenta
-Route::get('/create_accounts', 'App\Http\Controllers\accountsController@create')->name('create_accounts');
+Route::get('/accounts/create', 'App\Http\Controllers\accountsController@create')->name('accounts.create');
 //ruta para la creacion de nueva cuenta
-Route::post('/store_accounts', 'App\Http\Controllers\accountsController@store')->name('store_accounts');
+Route::post('/accounts', 'App\Http\Controllers\accountsController@store')->name('accounts.store');
 //ruta para el formulario de edicion de la cuenta seleccionada
-Route::post('/form_update_accounts', 'App\Http\Controllers\accountsController@form_update')->name('form_update_accounts');
+Route::get('/accounts/{id}/edit', 'App\Http\Controllers\accountsController@edit')->name('accounts.edit');
 //ruta para actualizar las cuentas
-Route::put('/update_accounts/{id}', 'App\Http\Controllers\accountsController@update')->name('update_accounts');
+Route::put('/accounts/{id}', 'App\Http\Controllers\accountsController@update')->name('accounts.update');
 //ruta para eliminar las cuentas
-Route::delete('/delete_accounts/{id}', 'App\Http\Controllers\accountsController@destroy')->name('delete_accounts');
+Route::delete('/accounts/{id}', 'App\Http\Controllers\accountsController@destroy')->name('accounts.destroy');
+
+//CITIES
+//ruta para ver las ciudades registradas en la db
+Route::get('/cities', 'App\Http\Controllers\citiesController@index')->name('cities.index');
+//ruta para el formulario de registro de nueva ciudad
+Route::get('/cities/create', 'App\Http\Controllers\citiesController@create')->name('cities.create');
+//ruta para la creacion de nueva ciudades
+Route::post('/cities', 'App\Http\Controllers\citiesController@store')->name('cities.store');
+//ruta para el formulario de edicion de la ciudad seleccionada
+Route::get('/cities/{id}/edit', 'App\Http\Controllers\citiesController@edit')->name('cities.edit');
+//ruta para actualizar las ciudades
+Route::put('/cities/{id}', 'App\Http\Controllers\citiesController@update')->name('cities.update');
+//ruta para eliminar las ciudades
+Route::delete('/cities/{id}', 'App\Http\Controllers\citiesController@destroy')->name('cities.destroy');
 
 //INFORMES
 //ruta para ver los informes

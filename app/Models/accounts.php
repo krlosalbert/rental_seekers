@@ -19,7 +19,13 @@ class accounts extends Model
      */
     protected $fillable = [
         'number',
-        'bank_id',
+        'banks_id',
 
     ];
+
+    //definir la relación con la tabla principal
+    public function banks()
+    {
+        return $this->belongsTo(banks::class, 'banks_id');
+    }
 }

@@ -21,4 +21,10 @@ class banks extends Model
         'name',
 
     ];
+
+    //definir la relación con la tabla secundaria
+    public function accounts()
+    {
+        return $this->hasOne(accounts::class, 'banks_id');
+    }
 }

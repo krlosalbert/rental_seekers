@@ -164,8 +164,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tablas secundarias:</h6>
                         <a class="collapse-item" href="{{ route('view_banks') }}">Bancos</a>
-                        <a class="collapse-item" href="{{ route('index_accounts') }}">Cuentas</a>
-                        <a class="collapse-item" href="#">Ciudades</a>
+                        <a class="collapse-item" href="{{ route('accounts.index') }}">Cuentas</a>
+                        <a class="collapse-item" href="{{ route('cities.index') }}">Ciudades</a>
                         <a class="collapse-item" href="#">Barrios</a>
                         <a class="collapse-item" href="#">Inmuebles</a>
                         <a class="collapse-item" href="#">Servicios</a>

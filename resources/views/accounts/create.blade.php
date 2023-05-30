@@ -1,10 +1,10 @@
-<form method="POST" action="{{ route('store_accounts') }}">
+<form method="POST" action="{{ route('accounts.store') }}">
     @csrf
     <div class="d-flex w-auto">
         <div class="d-inline w-100 p-3">
             <label for="number"><b>{{ __('Numero de cuenta') }}</b></label>
             <input type="number" name="number" class="form-control" placeholder="Digite el numero de cuenta"/> 
-            @error('name')
+            @error('number')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -18,7 +18,7 @@
                     <option value="{{ $bank->id }}">{{ $bank->name }}</option>
                 @endforeach
             </select>
-            @error('name')
+            @error('banks_id')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>

@@ -1,29 +1,29 @@
 /* inicializar el modal de inicio automaticamente */
 $(document).ready(function() {
     // Llamamos al botón del modal y le hacemos clic automáticamente
-    $('#btn-view_accounts').trigger('click');
+    $('#btn-view_cities').trigger('click');
 });
 
-/* modal para el formulario de nuevo cuenta */
+/* modal para el formulario de nuevo ciudad */
 $(document).ready(function() {
-    $('.form-accounts').click(function() {
+    $('.form-cities').click(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         $.ajax({
-            url: "/accounts/create",
+            url: "/cities/create",
             success: function(response) {
-                $('#form-accounts #body_form').html(response);
+                $('#form-cities #body_form').html(response);
             }
         });
     });
 });
 
-/* modal para el formulario de edicion de la cuenta seleccionada */
+/* modal para el formulario de edicion de la ciudad seleccionada */
 $(document).ready(function() {
-    $('.form-update-accounts').click(function() {
+    $('.form-update-cities').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
         $.ajaxSetup({
             headers: {
@@ -32,15 +32,15 @@ $(document).ready(function() {
         });
         $.ajax({
             type: "get",
-            url: `accounts/${id}/edit`,
+            url: `cities/${id}/edit`,
             success: function(response) {
-                $('#form-update-accounts #body_form').html(response);
+                $('#form-update-cities #body_form').html(response);
             }
         });
     });
 });
 
-/* mensaje de alerta de eliminacion de las cuentas */
+/* mensaje de alerta de eliminacion de la ciudad */
 $('.btn-delete').click(function (e) {
     e.preventDefault();
     var id = $(this).data('id');
@@ -53,7 +53,7 @@ $('.btn-delete').click(function (e) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Cuenta Eliminada con Exito!", "success")
+            swal("Listo!", "Ciudad Eliminada con Exito!", "success")
             .then((value) => {
                 $.ajaxSetup({
                     headers: {
@@ -61,13 +61,13 @@ $('.btn-delete').click(function (e) {
                     }
                  });
                 $.ajax({
-                    url: '/accounts/' + id,
+                    url: '/cities/' + id,
                     type: 'DELETE',
                     success: function (data) {
                         if (data.success) {
-                            window.location.replace('/accounts'); 
+                            window.location.replace('/cities'); 
                         } else {
-                            swal('Error!','La cuenta no se pudo borrar.','error');
+                            swal('Error!','La ciudad no se pudo borrar.','error');
                         }
                     }
                 });

@@ -64,6 +64,8 @@ class banksController extends Controller
     /* metodo para eliminar los bancos */
     public function destroy($id){
         $bank = banks::findOrFail($id);
+        //eliminar el registro relacionado de la tabla secundaria
+        $bank->accounts()->delete();
         //pregunto su fue exitoso la eliminacion
         if ($bank->delete()) {
             return response()->json(['success' => true]);
