@@ -168,7 +168,7 @@
                         <a class="collapse-item" href="{{ route('cities.index') }}">Ciudades</a>
                         <a class="collapse-item" href="{{ route('neighborhoods.index') }}">Barrios</a>
                         <a class="collapse-item" href="{{ route('properties.index') }}">Inmuebles</a>
-                        <a class="collapse-item" href="#">Servicios</a>
+                        <a class="collapse-item" href="{{ route('services.index') }}">Servicios</a>
                     </div>
                 </div>
             </li>

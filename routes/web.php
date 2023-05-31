@@ -156,6 +156,19 @@ Route::put('/properties/{id}', 'App\Http\Controllers\propertiesController@update
 //ruta para eliminar las propiedades
 Route::delete('/properties/{id}', 'App\Http\Controllers\propertiesController@destroy')->name('properties.destroy');
 
+//SERVICES
+//ruta para ver los servicios registrados en la db
+Route::get('/services', 'App\Http\Controllers\servicesController@index')->name('services.index');
+//ruta para el formulario de registro de un nuevo servicio
+Route::get('/services/create', 'App\Http\Controllers\servicesController@create')->name('services.create');
+//ruta para la creacion de un nuevo servicio
+Route::post('/services', 'App\Http\Controllers\servicesController@store')->name('services.store');
+//ruta para el formulario de edicion de un servicio seleccionado
+Route::get('/services/{id}/edit', 'App\Http\Controllers\servicesController@edit')->name('services.edit');
+//ruta para actualizar los servicios
+Route::put('/services/{id}', 'App\Http\Controllers\servicesController@update')->name('services.update');
+//ruta para eliminar los servicios
+Route::delete('/services/{id}', 'App\Http\Controllers\servicesController@destroy')->name('services.destroy');
 
 //INFORMES
 //ruta para ver los informes
