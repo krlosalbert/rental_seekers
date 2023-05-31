@@ -65,6 +65,8 @@ class citiesController extends Controller
      /* metodo para eliminar una ciudad */
      public function destroy($id){
         $city = cities::findOrFail($id);
+        //eliminar el registro relacionado de la tabla secundaria
+        $city->neighborhoods()->delete();
         //pregunto su fue exitoso la eliminacion
         if ($city->delete()) {
             return response()->json(['success' => true]);

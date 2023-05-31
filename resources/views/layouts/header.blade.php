@@ -166,8 +166,8 @@
                         <a class="collapse-item" href="{{ route('view_banks') }}">Bancos</a>
                         <a class="collapse-item" href="{{ route('accounts.index') }}">Cuentas</a>
                         <a class="collapse-item" href="{{ route('cities.index') }}">Ciudades</a>
-                        <a class="collapse-item" href="#">Barrios</a>
-                        <a class="collapse-item" href="#">Inmuebles</a>
+                        <a class="collapse-item" href="{{ route('neighborhoods.index') }}">Barrios</a>
+                        <a class="collapse-item" href="{{ route('properties.index') }}">Inmuebles</a>
                         <a class="collapse-item" href="#">Servicios</a>
                     </div>
                 </div>

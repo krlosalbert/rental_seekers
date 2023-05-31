@@ -21,4 +21,10 @@ class cities extends Model
         'name',
 
     ];
+
+     //definir la relación con la tabla secundaria
+    public function neighborhoods()
+    {
+        return $this->hasOne(neighborhoods::class, 'city_id');
+    }
 }

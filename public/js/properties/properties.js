@@ -1,29 +1,29 @@
 /* inicializar el modal de inicio automaticamente */
 $(document).ready(function() {
     // Llamamos al botón del modal y le hacemos clic automáticamente
-    $('#btn-view_cities').trigger('click');
+    $('#btn-view_properties').trigger('click');
 });
 
-/* modal para el formulario de nuevo ciudad */
+/* modal para el formulario de nuevo inmueble */
 $(document).ready(function() {
-    $('.form-cities').click(function() {
+    $('.form-properties').click(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         $.ajax({
-            url: "/cities/create",
+            url: "/properties/create",
             success: function(response) {
-                $('#form-cities #body_form').html(response);
+                $('#form-properties #body_form').html(response);
             }
         });
     });
 });
 
-/* modal para el formulario de edicion de la ciudad seleccionada */
+/* modal para el formulario de edicion de la propiedad seleccionada */
 $(document).ready(function() {
-    $('.form-update-cities').click(function() {
+    $('.form-update-properties').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
         $.ajaxSetup({
             headers: {
@@ -32,15 +32,15 @@ $(document).ready(function() {
         });
         $.ajax({
             type: "get",
-            url: `cities/${id}/edit`,
+            url: `properties/${id}/edit`,
             success: function(response) {
-                $('#form-update-cities #body_form').html(response);
+                $('#form-update-properties #body_form').html(response);
             }
         });
     });
 });
 
-/* mensaje de alerta de eliminacion de la ciudad */
+/* mensaje de alerta de eliminacion de la properpiedad */
 $('.btn-delete').click(function (e) {
     e.preventDefault();
     var id = $(this).data('id');
@@ -54,7 +54,7 @@ $('.btn-delete').click(function (e) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Ciudad Eliminada con Exito!", "success")
+            swal("Listo!", "Inmueble Eliminado con Exito!", "success")
             .then((value) => {
                 $.ajaxSetup({
                     headers: {
@@ -62,11 +62,11 @@ $('.btn-delete').click(function (e) {
                     }
                  });
                 $.ajax({
-                    url: '/cities/' + id,
+                    url: '/properties/' + id,
                     type: 'DELETE',
                     success: function (data) {
                         if (data.success) {
-                            window.location.replace('/cities'); 
+                            window.location.replace('/properties'); 
                         } else {
                             swal('Error!','La ciudad no se pudo borrar.','error');
                         }

@@ -128,6 +128,35 @@ Route::put('/cities/{id}', 'App\Http\Controllers\citiesController@update')->name
 //ruta para eliminar las ciudades
 Route::delete('/cities/{id}', 'App\Http\Controllers\citiesController@destroy')->name('cities.destroy');
 
+//NEIGHBORHOODS
+//ruta para ver los barrios registrados en la db
+Route::get('/neighborhoods', 'App\Http\Controllers\neighborhoodsController@index')->name('neighborhoods.index');
+//ruta para el formulario de registro de nuevo barrio
+Route::get('/neighborhoods/create', 'App\Http\Controllers\neighborhoodsController@create')->name('neighborhoods.create');
+//ruta para la creacion de nueva ciudades
+Route::post('/neighborhoods', 'App\Http\Controllers\neighborhoodsController@store')->name('neighborhoods.store');
+//ruta para el formulario de edicion de la ciudad seleccionada
+Route::get('/neighborhoods/{id}/edit', 'App\Http\Controllers\neighborhoodsController@edit')->name('neighborhoods.edit');
+//ruta para actualizar las ciudades
+Route::put('/cneighborhoods/{id}', 'App\Http\Controllers\neighborhoodsController@update')->name('neighborhoods.update');
+//ruta para eliminar las ciudades
+Route::delete('/neighborhoods/{id}', 'App\Http\Controllers\neighborhoodsController@destroy')->name('neighborhoods.destroy');
+
+//PROPERTIES
+//ruta para ver las propiedades registradas en la db
+Route::get('/properties', 'App\Http\Controllers\propertiesController@index')->name('properties.index');
+//ruta para el formulario de registro de nueva propiedad
+Route::get('/properties/create', 'App\Http\Controllers\propertiesController@create')->name('properties.create');
+//ruta para la creacion de nueva propiedad
+Route::post('/properties', 'App\Http\Controllers\propertiesController@store')->name('properties.store');
+//ruta para el formulario de edicion de la propiedad seleccionada
+Route::get('/properties/{id}/edit', 'App\Http\Controllers\propertiesController@edit')->name('properties.edit');
+//ruta para actualizar las propiedades
+Route::put('/properties/{id}', 'App\Http\Controllers\propertiesController@update')->name('properties.update');
+//ruta para eliminar las propiedades
+Route::delete('/properties/{id}', 'App\Http\Controllers\propertiesController@destroy')->name('properties.destroy');
+
+
 //INFORMES
 //ruta para ver los informes
 Route::get('/view_informes', 'App\Http\Controllers\informesController@view')->name('view_informes');

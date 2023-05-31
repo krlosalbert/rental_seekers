@@ -23,6 +23,12 @@ class neighborhoods extends Model
 
     ];
 
+    //definir la relación con la tabla principal
+    public function cities()
+    {
+        return $this->belongsTo(cities::class, 'city_id');
+    }
+
     //definir la relación con la tabla secundaria
     public function properties_neighborhoods()
     {
