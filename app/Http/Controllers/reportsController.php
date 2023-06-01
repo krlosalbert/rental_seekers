@@ -10,10 +10,10 @@ use App\Models\supervisors;
 
 
 
-class informesController extends Controller
+class reportsController extends Controller
 {
     //metodo para mostrar informes
-    public function supervisors(Request $request)
+    public function index(Request $request)
     {
         $date_start = $request->date_start_value;
         $date_end = $request->date_end_value;
@@ -72,7 +72,7 @@ class informesController extends Controller
         $supervisor = supervisors::findOrFail($user);
 
         dd($user);
-        return view('informes.supervisors', compact('supervisors'));
+        return view('reports.supervisors', compact('supervisors'));
         
     }
 }

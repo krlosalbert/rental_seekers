@@ -25,14 +25,16 @@ class servicesController extends Controller
     {
         $services = $request->validate([
             'name' => ['required', 'string'],
-            'valor' =>['required', 'numeric', 'min:0', 'regex:/^\d*(\.\d{1,2})?$/']
-
+            'valor' =>['required', 'numeric', 'min:0', 'regex:/^\d*(\.\d{1,2})?$/'],
+            'commission' =>['required', 'numeric', 'min:0', 'regex:/^\d*(\.\d{1,2})?$/'],
+            'residue' =>['required', 'numeric', 'min:0', 'regex:/^\d*(\.\d{1,2})?$/']
         ]);
         // Crear un nuevo servicio
         $service = services::create([
             'name' => $services['name'],
-            'valor' => $services['valor']
-
+            'valor' => $services['valor'],
+            'commission' => $services['commission'],
+            'residue' => $services['residue']
         ]);
         // Redireccionar a la vista de propiedades
         return redirect()->route('services.index')->with('success', 'Servicio Guardado  con exito');
@@ -56,8 +58,9 @@ class servicesController extends Controller
         //valido la informacion
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'valor' =>['required', 'numeric', 'min:0', 'regex:/^\d*(\.\d{1,2})?$/']
-
+            'valor' =>['required', 'numeric', 'min:0', 'regex:/^\d*(\.\d{1,2})?$/'],
+            'commission' =>['required', 'numeric', 'min:0', 'regex:/^\d*(\.\d{1,2})?$/'],
+            'residue' =>['required', 'numeric', 'min:0', 'regex:/^\d*(\.\d{1,2})?$/']
         ]);
         //mando la informacion validad para guardar los cambios
         $services->fill($validatedData);

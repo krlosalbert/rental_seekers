@@ -10,22 +10,22 @@ use App\Models\supervisors;
 class supervisorsController extends Controller
 {
     /* metodo para mostrar los supervisores */
-    public function read(){
+    public function index(){
         $supervisors = supervisors::select('*', 'name as name_supervisors', 'lastname as lastname_supervisors')
         ->join('users', 'supervisors.user_id', '=', 'users.id')
         ->get();
 
-        return view('supervisors.view', compact('supervisors'));
+        return view('supervisors.index', compact('supervisors'));
     }
     /* metodo para mostar el formulario de creacion de nuevo supervisor */
-    public function form()
+    public function create()
     {
         $users = User::All();
-        return view('supervisors.form', compact('users'));
+        return view('supervisors.create', compact('users'));
     }
 
     /* metodo para insertar en la db el nuevo supervisor */
-    protected function create(Request $request)
+    protected function store(Request $request)
     {
         
         $supervisors = $request->validate([
@@ -39,6 +39,6 @@ class supervisorsController extends Controller
         ]);
         
         // Redireccionar a la vista de roles
-        return redirect()->route('view_supervisors')->with('success', 'supervisor Guardado  con exito');
+        return redirect()->route('supervisors.index')->with('success', 'supervisor Guardado  con exito');
     }
 }

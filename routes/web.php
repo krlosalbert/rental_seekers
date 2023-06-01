@@ -9,7 +9,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//USUARIOS
+//USERS
 //ruta para ver los usuarios registrados
 Route::get('/view_users','App\Http\Controllers\usersController@read')->name('view_users');
 //ruta para ver los usuarios registrados detallados
@@ -39,16 +39,21 @@ Route::put('/update_roles/{id}','App\Http\Controllers\rolesController@update')->
 //ruta para eliminar los roles
 Route::delete('delete_roles/{id}','App\Http\Controllers\rolesController@destroy')->name('delete_roles');
 
-//SUPERVISORES
-Route::get('/view_supervisors', [App\Http\Controllers\supervisorsController::class, 'read'])->name('view_supervisors');
-Route::get('/form_supervisors', [App\Http\Controllers\supervisorsController::class, 'form'])->name('form_supervisors');
-Route::post('/create_supervisor', [App\Http\Controllers\supervisorsController::class, 'create'])->name('create_supervisor');
+//SUPERVISORS
+//ruta para ver los supervisores registrados en la db
+Route::get('/supervisors', 'App\Http\Controllers\supervisorsController@index')->name('supervisors.index');
+//ruta para el formulario de creacion de nuevo supervisor
+Route::get('/supervisors/create', 'App\Http\Controllers\supervisorsController@create')->name('supervisors.create');
+//ruta para la creacion de un nuevo supervisor
+Route::post('/supervisors', 'App\Http\Controllers\supervisorsController@store')->name('supervisors.store');
 
-//ASESORES
+//ADVISORS
 //rura para ver los asesores
-Route::get('/view_advisors', [App\Http\Controllers\advisorsController::class, 'read'])->name('view_advisors');
-//ruta para el formulario de edicion de roles
-Route::post('/supervisor_advisor','App\Http\Controllers\advisorsController@supervisor_advisor')->name('supervisor_advisor');
+Route::get('/advisors', 'App\Http\Controllers\advisorsController@index')->name('advisors.index');
+//ruta para ver las ventas de los asesores
+Route::get('/advisors/{id}', 'App\Http\Controllers\advisorsController@show')->name('advisors.show');
+//ruta para el reporte de los asesores
+Route::get('/advisors/{id}/reports', 'App\Http\Controllers\advisorsController@reports')->name('advisors.reports');
 
 //VENTAS
 //ruta para ver las ventas registradas en la db 
@@ -76,7 +81,6 @@ Route::post('/details_sales', [App\Http\Controllers\salesController::class, 'det
 Route::post('/create_sales', [App\Http\Controllers\salesController::class, 'create'])->name('create_sales');
 //ruta para eliminar las ventas
 Route::delete('/delete_sales/{id}', 'App\Http\Controllers\salesController@destroy')->name('delete_sales');
-
 
 //CLIENTES
 //ruta para el formulario de buscar cliente en la db
@@ -170,11 +174,7 @@ Route::put('/services/{id}', 'App\Http\Controllers\servicesController@update')->
 //ruta para eliminar los servicios
 Route::delete('/services/{id}', 'App\Http\Controllers\servicesController@destroy')->name('services.destroy');
 
-//INFORMES
+//REPORTS
 //ruta para ver los informes
-Route::get('/view_informes', 'App\Http\Controllers\informesController@view')->name('view_informes');
-Route::post('/view_informe', 'App\Http\Controllers\informesController@supervisors')->name('view_informe');
-Route::get('/search_supervisor', 'App\Http\Controllers\informesController@search_supervisor');
-Route::post('/search_supervisor', 'App\Http\Controllers\informesController@search_supervisor')->name('search_supervisor');
-
+Route::post('/reports', 'App\Http\Controllers\reportsController@index')->name('reports.index');
 

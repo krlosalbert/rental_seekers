@@ -22,6 +22,27 @@
                 @enderror
             </div>
         </div>
+
+        <div class="d-flex w-auto">
+            <div class="d-inline w-100 p-3">
+                <label for="commission"><b>{{ __('Comision') }}</b></label>
+                <input type="number" name="commission" class="form-control" value="{{ $service->commission }}" /> 
+                @error('commission')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="d-inline w-100 p-3">
+                <label for="residue"><b>{{ __('Residual') }}</b></label>
+                <input type="number" name="residue" class="form-control" value="{{ $service->residue }}" /> 
+                @error('residue')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
                 
         <div class="row mb-0">
             <div>

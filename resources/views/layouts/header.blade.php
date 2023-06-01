@@ -32,22 +32,19 @@
 </head>
 
 <body id="page-top">
-
-    <!-- Page Wrapper -->
+    <!-- contenedor principal -->
     <div id="wrapper">
-
-        <!-- Sidebar -->
+        <!-- Barra lateral o Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
             <!-- Marca y nombre de la empresa -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
                 <div class="sidebar-brand-icon">
                     <img class="sidebar-card-illustration mb-2" src="{{ asset('images/Logo.jpg') }}" alt="...">
                 </div>
                 <div class="sidebar-brand-text mx-3">Buscadores de Arriendos </div>
             </a>
 
-            <!-- Divider -->
+            <!-- Barra divisora -->
             <hr class="sidebar-divider">
 
            <!-- Heading -->
@@ -83,16 +80,16 @@
                 <div id="employees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Agregar Cargos:</h6>
-                        <a class="collapse-item" href="{{ route('form_supervisors') }}">Supervisor</a>
+                        <a class="collapse-item" href="{{ route('supervisors.create') }}">Supervisor</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Consultar Cargos:</h6>
-                        <a class="collapse-item" href="{{ route('view_supervisors') }}">Supervisores</a>
-                        <a class="collapse-item" href="{{ route('view_advisors') }}">Asesores</a>
+                        <a class="collapse-item" href="{{ route('supervisors.index') }}">Supervisores</a>
+                        <a class="collapse-item" href="{{ route('advisors.index') }}">Asesores</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Divider -->
+            <!-- barra divisora -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
@@ -118,7 +115,7 @@
                 </div>
             </li>
 
-            <!-- Divider -->
+            <!-- barra divisora -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
@@ -136,17 +133,12 @@
                 <div id="informes" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">General:</h6>
-                        <a class="collapse-item" href="{{ route('view_banks') }}">Ingresos</a>
-                        <a class="collapse-item" href="#">Cuentas</a>
-                        <a class="collapse-item" href="#">Ciudades</a>
-                        <a class="collapse-item" href="#">Barrios</a>
-                        <a class="collapse-item" href="#">Inmuebles</a>
-                        <a class="collapse-item" href="#">Servicios</a>
+                        <a class="collapse-item" href="{{ route('reports.index') }}">General</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Divider -->
+            <!-- barra divisora -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
@@ -173,7 +165,7 @@
                 </div>
             </li>
 
-            <!-- Divider -->
+            <!-- barra divisora -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- encoger el menu -->
@@ -190,57 +182,24 @@
                 </p>
                 <a class="btn btn-success btn-sm" href="#">Ver mas informacion</a>
             </div>
-        </ul>
-        <!-- End of Sidebar -->
+        </ul><!-- fin de la barra lateral -->
 
         <!-- inicio del menu horizontal -->
         <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
+            <!-- contenedor del menu horizontal -->
             <div id="content">
-
-                <!-- Topbar -->
+                <!-- Barra superior o Topbar -->
                 <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow" id="menu_horizontal">
-
-                    <!-- barra de busqueda -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar por..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
+                    <!-- Mensaje de Administrador -->
+                    <div class="input-group">
+                        <h3>
+                            Bienvenido Administrador 
+                            <b> {{ Auth::user()->name }} {{ Auth::user()->lastname }}, </b>
+                            este espacio fue diseñado para ti
+                        </h3>
+                    </div>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
                         <!-- Alertas -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -341,20 +300,14 @@
                             </div>
                         </li>
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 
                 <!-- Inicio del contenido de la pagina -->
                 <div class="container-fluid" id="content">
-
-                @yield('content')
-
+                    @yield('content') <!-- aqui va el contenido de la pagina -->
                 </div>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
+            </div><!-- fin del contenedor del menu horizontal-->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -363,14 +316,9 @@
                         <span>Buscadores de arriendos &copy; Tu sitio web preferido</span>
                     </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
+            </footer><!-- End of Footer -->
+        </div><!-- fin del menu horizontal -->
+    </div><!-- fin del contenedor principal -->
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/bootstrap-1.min.js') }}"></script>

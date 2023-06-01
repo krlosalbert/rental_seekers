@@ -6,10 +6,10 @@
 
     <!-- Modal -->
     <div class="modal fade" id="modal-view_services" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex" id="head_form">
-                    <h3 class="modal-title" id="myModalLabel">{{ __('Services') }}<h3>
+                    <h3 class="modal-title" id="myModalLabel">{{ __('Servicios') }}<h3>
                     <!-- Button trigger modal el registro de nuevo banco -->
                     <button class="btn btn-secondary form-services" data-toggle="modal" data-target="#form-services">
                         Nuevo
@@ -22,7 +22,9 @@
                             <tr>
                                 <th class="text-center" scope="col">#</th>
                                 <th class="text-center" scope="col">Servicio</th>
-                                <th class="text-center" scope="col">Valor</th>
+                                <th class="text-center" scope="col">Valor ($)</th>
+                                <th class="text-center" scope="col">Comision ($)</th>
+                                <th class="text-center" scope="col">Residual ($)</th>
                                 <th class="text-center" scope="col">Accion</th>
                             </tr>
                         </thead>
@@ -34,7 +36,9 @@
                             <tr>  
                                 <td class="text-center">{{ $x += 1;}}</td>
                                 <td class="text-center">{{ $service->name }}</td>
-                                <td class="text-center">{{ $service->valor }}</td>
+                                <td class="text-center">{{ number_format($service->valor, 0, ',', '.') }}</td>
+                                <td class="text-center">{{ number_format($service->commission, 0, ',', '.') }}</td>
+                                <td class="text-center">{{ number_format($service->residue, 0, ',', '.') }}</td>
                                 <td class="text-center">
                                     <!-- Button trigger modal para editar -->
                                     <button class="btn btn-warning form-update-services" data-toggle="modal" data-target="#form-update-services" data-id="{{ $service->id }}">
@@ -60,7 +64,7 @@
     
     <!-- Modal para el formulario de un nuevo servicio-->
     <div class="modal fade" id="form-services" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex" id="head_form">
                     <h3 class="modal-title" id="myModalLabel">{{ __('Registrar Nuevo servicio') }}<h3>
@@ -75,7 +79,7 @@
         
     <!-- Modal para el formulario de editar un servicio-->
     <div class="modal fade" id="form-update-services" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex" id="head_form">
                     <h3 class="modal-title" id="myModalLabel">{{ __('Editar servicio') }}<h3>

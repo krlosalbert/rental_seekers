@@ -14,7 +14,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body" id="body_form">
-                <form method="POST" action="{{ route('create_supervisor') }}">
+                <form method="POST" action="{{ route('supervisors.store') }}">
                     @csrf
                     <div class="d-flex w-auto">
                         <div class="d-inline w-100 p-3">
