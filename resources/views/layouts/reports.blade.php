@@ -157,12 +157,8 @@
                                                 <th class="text-center align-middle">Total ($)</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            @php
-                                                $x = 0;
-                                                $total_service = 0;
-                                            @endphp
-                                            @yield('fields_table')<!-- campos de la tabla -->
+                                        <tbody id="table">
+                                            <!-- campos de la tabla -->
                                         </tbody>
                                     </table>
                                 </div>

@@ -7,61 +7,64 @@ use Illuminate\Support\Collection;
 use App\Models\sales;
 use App\Models\User;
 use App\Models\supervisors;
-
-
+use Illuminate\Support\Facades\DB;
 
 class reportsController extends Controller
 {
     //metodo para mostrar informes
     public function index(Request $request)
     {
+        //tomo las fechas que vienen de la vista para hacer el filtro
         $date_start = $request->date_start_value;
         $date_end = $request->date_end_value;
+        $total = 0;
 
-        $amount_sale_general = (object) sales::whereBetween('date', [$date_start, $date_end])
-        ->where('sales.service_id', '=', 1)
-        ->count();
-
-        $sales_general = (object) sales::select('services.valor as valor')
+        //consulto las ventas generales
+        $sales_general = sales::select('services.valor as valor')
         ->join('services', 'sales.service_id', 'services.id')
         ->whereBetween('date', [$date_start, $date_end])
+        ->where('sales.advisor_id', '=', $request->id)
         ->where('sales.service_id', '=', 1)
         ->get();
 
-        $amount_sale_special = (object) sales::whereBetween('date', [$date_start, $date_end])
-        ->where('sales.service_id', '=', 2)
-        ->count();
-
-        $sales_special = (object) sales::select('services.valor as valor')
+        //consulto las ventas personalizadas
+        $sales_special = sales::select('services.valor as valor')
         ->join('services', 'sales.service_id', 'services.id')
         ->whereBetween('date', [$date_start, $date_end])
+        ->where('sales.advisor_id', '=', $request->id)
         ->where('sales.service_id', '=', 2)
+        ->get();
+
+        //instancio la clase para traer las ventas por asesor
+        $sales = sales::select('services.name as service_name',
+                                'services.valor as service_valor',
+                                'services.commission as service_commission',
+                                DB::raw('COUNT(*) as total'))
+        ->join('services', 'sales.service_id', '=', 'services.id')
+        ->whereBetween('date', [$date_start, $date_end])
+        ->where('sales.advisor_id', '=', $request->id)
+        ->groupBy('services.name', 'services.valor', 'services.commission') 
         ->get();
         
-        if($amount_sale_general != null || $amount_sale_special != null)
+        //valido que la informacion traida no sea null
+        if($sales_general != null || $sales_special != null)
         {
-            foreach($sales_general as $sale_general){ 
+            $amount_general = count($sales_general);
+            $amount_special = count($sales_special);
 
-                foreach($sales_special as $sale_special){ 
-
-                    $amount = $amount_sale_general->scalar;
-                    $valor = $sale_general->valor;
-        
-                    $amount2 = $amount_sale_special->scalar;
-                    $valor2 = $sale_special->valor;
-        
-                    $total = ($amount*$valor)+($amount2*$valor2);
-                }
-            }
-        } 
-       
-        return response()->json([
-            'amount_sale_general' => $amount_sale_general,
-            'amount_sale_special' => $amount_sale_special,
-            'total' => $total
+            foreach($sales_general as $sale_general){}
+            foreach($sales_special as $sale_special){}
             
-        ]); 
-        
+            $total = ($amount_general*$sale_general->valor)+($amount_special*$sale_special->valor);
+           
+            //retorno las variables a la vista
+            return response()->json([
+                'sales_general' => $sales_general,
+                'sales_special' => $sales_special,
+                'sales' => $sales,
+                'total' => $total
+            ]);              
+        } 
     }
 
     // metodo para buscar al supervisor por el nombre

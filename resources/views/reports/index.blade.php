@@ -3,6 +3,7 @@
 @section('header_page')
     <div class="card border-left-primary shadow h-100 py-2 w-100">
         <h1 class="h3 mb-0 text-gray-800">Informe para pago al Asesor {{ $advisor->name_advisors }} {{ $advisor->lastname_advisors }}</h1>
+        <input type="hidden" id="id_advisors" value="{{ $advisor->id_advisors }}"/>
     </div>
 @endsection
 
@@ -32,24 +33,6 @@
 
 @section('field_change')
     <th class="text-center align-middle">Comision ($)</th>
-@endsection
-
-@section('fields_table')
-    @foreach($sales as $sale)
-        <tr>
-            <td class="text-center">{{ $x += 1 }}</td>
-            <td class="text-center">{{ $sale->service_name }}</td>
-            <td class="text-center">{{ $sale->total }}</td>
-            <td class="text-center">{{ number_format($sale->service_valor, 0, ',', '.') }}</td>
-            <td class="text-center">{{ number_format($sale->service_commission, 0, ',', '.') }}</td>
-            <td class="text-center">
-                @php
-                    $total_service = $sale->total*$sale->service_commission
-                @endphp
-                {{ number_format($total_service, 0, ',', '.') }}
-            </td>
-        </tr>
-    @endforeach
 @endsection
 
 @section('js_reports')

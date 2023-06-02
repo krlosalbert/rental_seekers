@@ -60,6 +60,7 @@ class advisorsController extends Controller
     {
         // detalles del supervisor del asesor
         $advisors = advisors::select('*', 
+                                    'advisors.id as id_advisors',
                                     'name as name_advisors',
                                     'lastname as lastname_advisors',
                                     'addres as addres_advisors',
