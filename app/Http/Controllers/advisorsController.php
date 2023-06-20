@@ -56,6 +56,36 @@ class advisorsController extends Controller
         return view('advisors.show', compact('sales', 'supervisors', 'id_advisors'));
     }
 
+    //metodo para editar el supervisor de los asesores
+    public function edit($id)
+    {
+        //asigno el valor del id mandado a la variable para retornarlo a la vista
+        $advisor_id = $id;
+        //instancio la calse para traer los supervisores
+        $supervisors = supervisors::select( '*', 'supervisors.id as supervisor_id')
+        ->join('users', 'supervisors.user_id', '=', 'users.id')
+        ->get();
+        //retorno las variables a la vista
+        return view('advisors.edit', compact('supervisors', 'advisor_id'));
+    }
+
+    /* metodo para actualizar el supervisor */
+    public function update(Request $request, $id)
+    {
+        $advisors = advisors::findOrFail($id);
+        //valido la informacion
+        $validatedData = $request->validate([
+            'supervisor_id' => 'required|integer'
+        ]);
+        //mando la informacion validad para guardar los cambios
+        $advisors->fill($validatedData);
+        //guardo la informacion en la db
+        $advisors->save();
+        //redirecciono a la vista
+        return redirect()->route('advisors.index')->with('update', 'Supervisor asigando correctamente');
+    }
+
+    //metodo para ver informe de los asesores
     public function reports($id)
     {
         // detalles del supervisor del asesor

@@ -2,10 +2,8 @@
 $(document).ready(function() {
     // Llamamos al botón del modal y le hacemos clic automáticamente
     $('#btn-view_neighborhoods').trigger('click');
-});
 
-/* modal para el formulario de un nuevo barrio */
-$(document).ready(function() {
+    /* modal para el formulario de un nuevo barrio */
     $('.form-neighborhoods').click(function() {
         $.ajaxSetup({
             headers: {

@@ -63,7 +63,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Total ingresos
+                                Total Comision
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
@@ -171,27 +171,15 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="left">
-                                                        <strong>Subtotal</strong>
+                                                        <strong>Total Ingresos Empresa</strong>
                                                     </td>
-                                                    <td class="text-right bg-light"></td>
+                                                    <td class="text-right bg-light" id="result_general"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="left">
-                                                        <strong>Descuento</strong>
+                                                        <strong>Total Comision</strong>
                                                     </td>
-                                                    <td class="text-right bg-light">$ 0</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="left">
-                                                        <strong>Costo de Envio</strong>
-                                                    </td>
-                                                    <td class="text-right bg-light"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="left">
-                                                        <strong>Total</strong>
-                                                    </td>
-                                                    <td class="text-right bg-light">
+                                                    <td class="text-right bg-light" id="result_commission">
                                                         <strong></strong>
                                                     </td>
                                                 </tr>

@@ -17,10 +17,11 @@ class reportsController extends Controller
         //tomo las fechas que vienen de la vista para hacer el filtro
         $date_start = $request->date_start_value;
         $date_end = $request->date_end_value;
-        $total = 0;
+        $valor = 0;
+        $commission = 0;
 
         //consulto las ventas generales
-        $sales_general = sales::select('services.valor as valor')
+        $sales_general = sales::select('services.valor as valor', 'services.commission as commission')
         ->join('services', 'sales.service_id', 'services.id')
         ->whereBetween('date', [$date_start, $date_end])
         ->where('sales.advisor_id', '=', $request->id)
@@ -28,7 +29,7 @@ class reportsController extends Controller
         ->get();
 
         //consulto las ventas personalizadas
-        $sales_special = sales::select('services.valor as valor')
+        $sales_special = sales::select('services.valor as valor', 'services.commission as commission')
         ->join('services', 'sales.service_id', 'services.id')
         ->whereBetween('date', [$date_start, $date_end])
         ->where('sales.advisor_id', '=', $request->id)
@@ -55,14 +56,16 @@ class reportsController extends Controller
             foreach($sales_general as $sale_general){}
             foreach($sales_special as $sale_special){}
             
-            $total = ($amount_general*$sale_general->valor)+($amount_special*$sale_special->valor);
+            $valor = ($amount_general*$sale_general->valor)+($amount_special*$sale_special->valor);
+            $commission = ($amount_general*$sale_general->commission)+($amount_special*$sale_special->commission);
            
             //retorno las variables a la vista
             return response()->json([
                 'sales_general' => $sales_general,
                 'sales_special' => $sales_special,
+                'commission' => $commission,
                 'sales' => $sales,
-                'total' => $total
+                'valor' => $valor
             ]);              
         } 
     }

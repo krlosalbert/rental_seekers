@@ -59,7 +59,7 @@ $('.btn-delete').click(function (e) {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                 });
+                });
                 $.ajax({
                     url: '/accounts/' + id,
                     type: 'DELETE',

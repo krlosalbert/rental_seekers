@@ -46,12 +46,22 @@ Route::get('/supervisors', 'App\Http\Controllers\supervisorsController@index')->
 Route::get('/supervisors/create', 'App\Http\Controllers\supervisorsController@create')->name('supervisors.create');
 //ruta para la creacion de un nuevo supervisor
 Route::post('/supervisors', 'App\Http\Controllers\supervisorsController@store')->name('supervisors.store');
+//ruta para ver detalle de los supervisores
+Route::get('/supervisors/{id}', 'App\Http\Controllers\supervisorsController@show')->name('supervisors.show');
+//ruta para el formulario de edicion del asesor seleccionado
+Route::get('/supervisors/{id}/edit', 'App\Http\Controllers\supervisorsController@edit')->name('supervisors.edit');
+//ruta para actualizar el supervisor del asesor
+Route::put('/supervisors/{id}', 'App\Http\Controllers\supervisorsController@update')->name('supervisors.update');
 
 //ADVISORS
 //rura para ver los asesores
 Route::get('/advisors', 'App\Http\Controllers\advisorsController@index')->name('advisors.index');
 //ruta para ver las ventas de los asesores
 Route::get('/advisors/{id}', 'App\Http\Controllers\advisorsController@show')->name('advisors.show');
+//ruta para el formulario de edicion del asesor seleccionada
+Route::get('/advisors/{id}/edit', 'App\Http\Controllers\advisorsController@edit')->name('advisors.edit');
+//ruta para actualizar el supervisor del asesor
+Route::put('/advisors/{id}', 'App\Http\Controllers\advisorsController@update')->name('advisors.update');
 //ruta para el reporte de los asesores
 Route::get('/advisors/{id}/reports', 'App\Http\Controllers\advisorsController@reports')->name('advisors.reports');
 

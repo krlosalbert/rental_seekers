@@ -18,6 +18,7 @@
     <link href="{{ asset('css/bootstrap-1.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
     <!-- script para desplegar los menus -->
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/bootstrapMenu.js') }}"></script>
@@ -79,9 +80,6 @@
                 </a>
                 <div id="employees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Agregar Cargos:</h6>
-                        <a class="collapse-item" href="{{ route('supervisors.create') }}">Supervisor</a>
-                        <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Consultar Cargos:</h6>
                         <a class="collapse-item" href="{{ route('supervisors.index') }}">Supervisores</a>
                         <a class="collapse-item" href="{{ route('advisors.index') }}">Asesores</a>
@@ -323,6 +321,8 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/bootstrap-1.min.js') }}"></script>
 
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrapDatatables.js') }}"></script>
     @yield('js')
 </body>
 
