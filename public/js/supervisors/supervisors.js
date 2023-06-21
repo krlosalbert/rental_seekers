@@ -1,7 +1,11 @@
 import { headerAjax } from '../functions/functions.js';
+import { datatables } from '../functions/functions.js';
 
 //cuando el documento se carge se ejecuta lo siguiente
 $(document).ready(function() {
+
+    var x = "#tbl-supervisors";
+    datatables(x);
     
     // Llamamos al botón del modal y le hacemos clic automáticamente
     $('#btn-view_supervisors').trigger('click');

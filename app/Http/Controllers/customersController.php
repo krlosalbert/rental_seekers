@@ -15,20 +15,20 @@ use App\Models\properties;
 class customersController extends Controller
 {
     /* metodo para ver el formulario para registrar las ventas */
-    public function form()
+    public function search()
     {
         return view('customers.search');
     }
 
     //busqueda de clientes en la db
-    public function search_customers(Request $request)
+    public function show(Request $request)
     {
-    //instancio la clase para traer los datos de la db que contengan lo que lleva la variable search
-    $customers = customers::select('*')
-    ->where('name', 'LIKE', '%'.$request->search.'%')
-    ->get(); 
-    //retorno los datos obtenidos a la vista
-    return view('customers.details', compact('customers'));
+        //instancio la clase para traer los datos de la db que contengan lo que lleva la variable search
+        $customers = customers::select('*')
+        ->where('name', 'LIKE', '%'.$request->search.'%')
+        ->get(); 
+        //retorno los datos obtenidos a la vista
+        return view('customers.show', compact('customers'));
     }
 
     //busqueda de clientes en la db
@@ -45,6 +45,6 @@ class customersController extends Controller
         ->get();
         $banks = banks::All();
         //retorno los datos obtenidos a la vista
-        return view('sales.form', compact('customers', 'cities', 'supervisors', 'banks'));
+        return view('sales.create', compact('customers', 'cities', 'supervisors', 'banks'));
     }
 }

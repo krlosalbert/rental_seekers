@@ -1,15 +1,14 @@
-/* inicializar el modal de inicio automaticamente */
-$(document).ready(function() {
-    // Llamamos al botón del modal y le hacemos clic automáticamente
-    $('#btn-view_neighborhoods').trigger('click');
+import { headerAjax } from '../functions/functions.js';
+import { datatables } from '../functions/functions.js';
 
+$(document).ready(function() {
+
+    var x = "#tbl-neighborhoods";
+    datatables(x);
+    
     /* modal para el formulario de un nuevo barrio */
     $('.form-neighborhoods').click(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             url: "/neighborhoods/create",
             success: function(response) {
@@ -17,18 +16,11 @@ $(document).ready(function() {
             }
         });
     });
-});
 
-/* modal para el formulario de edicion de un barrio seleccionado */
-$(document).ready(function() {
+    /* modal para el formulario de edicion de un barrio seleccionado */
     $('.form-update-neighborhoods').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        console.log(id);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             type: "get",
             url: `neighborhoods/${id}/edit`,
@@ -52,26 +44,21 @@ $('.btn-delete').click(function (e) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Barrio Eliminado con Exito!", "success")
-            .then((value) => {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                 });
-                $.ajax({
-                    url: '/neighborhoods/' + id,
-                    type: 'DELETE',
-                    success: function (data) {
-                        if (data.success) {
+            headerAjax();
+            $.ajax({
+                url: '/neighborhoods/' + id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.success) {
+                        swal("Listo!", "Barrio Eliminado con Exito!", "success")
+                        .then((value) => {
                             window.location.replace('/neighborhoods'); 
-                        } else {
-                            swal('Error!','el barrio no se pudo borrar.','error');
-                        }
+                        });
+                    } else {
+                        swal('Error!','el barrio no se pudo borrar.','error');
                     }
-                });
-            }) 
+                }
+            });
         }
-    });
-    
+    }); 
 });

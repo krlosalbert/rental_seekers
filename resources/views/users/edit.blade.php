@@ -1,5 +1,5 @@
 @foreach ($users as $user)
-    <form method="POST" action="{{ route('update_users', $user->user_id) }}">
+    <form method="POST" action="{{ route('users.update', $user->user_id) }}">
         @method('PUT')
         @csrf
         <div class="d-flex w-auto">

@@ -1,9 +1,5 @@
 @extends('layouts.header')
 
-@section('css')
-    <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
 <div class="col-8 mx-auto card d-flex justify-content-around flex-wrap" id="body_form">
         <div class="table-responsive" style="overflow-x: unset;">
@@ -11,7 +7,7 @@
                 <h3>Asesores<h3>
             </div>
             <table class="table" id="tbl-advisors">
-                <thead class="">
+                <thead>
                     <tr>
                         <th class="text-center" scope="col">#</th>
                         <th class="text-center" scope="col">Nombre</th>
@@ -45,93 +41,49 @@
                     @endforeach      
                 </tbody> 
             </table>
-        </div>
-    </div>
-
-    <!-- Modal para el formulario de ver los detalles de las ventas-->
-    <div class="modal fade" id="show_sales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header d-flex" id="head_form">
-                    <h3 class="modal-title" id="myModalLabel">{{ __('Detalles de ventas') }}<h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body" id="body_form">
-                    <!-- aqui va el contenido -->                    
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para el formulario de editar al supervisor-->
-    <div class="modal fade" id="form_update-advisors" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header d-flex" id="head_form">
-                    <h3 class="modal-title" id="myModalLabel">{{ __('Editar Supervisor del asesor') }}<h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body" id="body_form">
-                    <!-- aqui va el contenido -->                    
+            <!-- Modal para el formulario de ver los detalles de las ventas-->
+            <div class="modal fade" id="show_sales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex" id="head_form">
+                            <h3 class="modal-title" id="myModalLabel">{{ __('Detalles de ventas') }}<h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" id="body_form">
+                            <!-- aqui va el contenido -->                    
+                        </div>
+                    </div>
                 </div>
             </div>
+        
+            <!-- Modal para el formulario de editar al supervisor-->
+            <div class="modal fade" id="form_update-advisors" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex" id="head_form">
+                            <h3 class="modal-title" id="myModalLabel">{{ __('Editar Supervisor del asesor') }}<h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" id="body_form">
+                            <!-- aqui va el contenido -->                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            @section('js')
+                <script type="module" src="{{ asset('js/advisors/advisors.js') }}"></script>
+                @if(session('success'))
+                    <script>
+                        swal("Listo!", "Asesor Guardado con Exito!", "success")
+                    </script>
+                @endif
+                @if(session('update'))
+                    <script>
+                        swal("Listo!", "Supervisor modificado Exitosamente!", "success")
+                    </script>
+                @endif
+            @endsection
         </div>
     </div>
-
-    <script src="{{ asset('js/datatables.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrapDatatables.js') }}"></script>
-    <script src="{{ asset('js/advisors/advisors.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            var advisors = @json($advisors); // Obtén el array de asesores desde PHP
-            if (advisors.length > 4) {
-                // Inicializa y configura el DataTable
-                $('#tbl-advisors').DataTable({
-                    'lengthMenu' : [[ 5, 10, 15, -1], [ 5, 10, 15, "Todo"]],
-                    'pageLength': 5,
-                    'language': { 
-                        "sLengthMenu": "Mostrar _MENU_ registros",
-                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                        "sSearch": "Buscar:",
-                        "sEmptyTable": "No hay datos disponibles en la tabla",
-                        "sInfoEmpty": "Mostrando 0 a 0 de 0 registros",
-                        "sInfoEmpty":      "Mostrando 0 a 0 de 0 registros",
-                        "sInfoFiltered":   "(filtrado de _MAX_ registros en total)",
-                        "sInfoPostFix":    "",
-                        "sInfoThousands":  ",",
-                        "sLoadingRecords": "Cargando...",
-                        "sProcessing":     "Procesando...",
-                        "sZeroRecords":    "No se encontraron registros",
-                        "oPaginate": {
-                            "sFirst":    "Primero",
-                            "sLast":     "Último",
-                            "sNext":     "Siguiente",
-                            "sPrevious": "Anterior"
-                        },
-                        "oAria": {
-                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                        },
-                        "select": {
-                            "rows": {
-                            "_": "Seleccionado %d filas",
-                            "0": "Ninguna fila seleccionada",
-                            "1": "Seleccionado 1 fila"
-                            }
-                        }
-                    },
-                });
-            }
-        });
-    </script>
-    @if(session('success'))
-        <script>
-            swal("Listo!", "Asesor Guardado con Exito!", "success").then((value) => {}) 
-        </script>
-    @endif
-    @if(session('update'))
-        <script>
-            swal("Listo!", "Supervisor modificado Exitosamente!", "success").then((value) => {}) 
-        </script>
-    @endif
 @endsection

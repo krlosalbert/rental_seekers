@@ -63,9 +63,9 @@
                 <div id="users" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Items Usuarios:</h6>
-                        <a class="collapse-item" href="{{ route('form_users') }}">Nuevo</a>
-                        <a class="collapse-item" href="{{ route('view_users') }}">Consultar</a>
-                        <a class="collapse-item" href="{{ route('view_roles') }}">Rol</a>
+                        <a class="collapse-item" href="{{ route('users.create') }}">Nuevo</a>
+                        <a class="collapse-item" href="{{ route('users.index') }}">Consultar</a>
+                        <a class="collapse-item" href="{{ route('roles.index') }}">Rol</a>
                     </div>
                 </div>
             </li>
@@ -107,8 +107,8 @@
                 <div id="sales" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Items Ventas:</h6>
-                        <a class="collapse-item" href="{{ route('form_customers') }}">Registrar</a>
-                        <a class="collapse-item" href="{{ route('view_sales') }}">Consultar</a>
+                        <a class="collapse-item" href="{{ route('customers.search') }}">Registrar</a>
+                        <a class="collapse-item" href="{{ route('sales.index') }}">Consultar</a>
                     </div>
                 </div>
             </li>
@@ -153,7 +153,7 @@
                 <div id="tables" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tablas secundarias:</h6>
-                        <a class="collapse-item" href="{{ route('view_banks') }}">Bancos</a>
+                        <a class="collapse-item" href="{{ route('banks.index') }}">Bancos</a>
                         <a class="collapse-item" href="{{ route('accounts.index') }}">Cuentas</a>
                         <a class="collapse-item" href="{{ route('cities.index') }}">Ciudades</a>
                         <a class="collapse-item" href="{{ route('neighborhoods.index') }}">Barrios</a>

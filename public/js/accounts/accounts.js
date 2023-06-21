@@ -1,17 +1,14 @@
-/* inicializar el modal de inicio automaticamente */
-$(document).ready(function() {
-    // Llamamos al botón del modal y le hacemos clic automáticamente
-    $('#btn-view_accounts').trigger('click');
-});
+import { headerAjax } from '../functions/functions.js';
+import { datatables } from '../functions/functions.js';
 
-/* modal para el formulario de nuevo cuenta */
 $(document).ready(function() {
+    
+    var x = "#tbl-accounts";
+    datatables(x);
+
+    /* modal para el formulario de nuevo cuenta */
     $('.form-accounts').click(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             url: "/accounts/create",
             success: function(response) {
@@ -19,17 +16,11 @@ $(document).ready(function() {
             }
         });
     });
-});
 
-/* modal para el formulario de edicion de la cuenta seleccionada */
-$(document).ready(function() {
+    /* modal para el formulario de edicion de la cuenta seleccionada */
     $('.form-update-accounts').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             type: "get",
             url: `accounts/${id}/edit`,
@@ -53,26 +44,21 @@ $('.btn-delete').click(function (e) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Cuenta Eliminada con Exito!", "success")
-            .then((value) => {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: '/accounts/' + id,
-                    type: 'DELETE',
-                    success: function (data) {
-                        if (data.success) {
+           headerAjax();
+            $.ajax({
+                url: '/accounts/' + id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.success) {
+                        swal("Listo!", "Cuenta Eliminada con Exito!", "success")
+                        .then((value) => {
                             window.location.replace('/accounts'); 
-                        } else {
-                            swal('Error!','La cuenta no se pudo borrar.','error');
-                        }
+                        });
+                    } else {
+                        swal('Error!','La cuenta no se pudo ser eliminada.','error');
                     }
-                });
-            }) 
+                }
+            });
         }
     });
-    
 });

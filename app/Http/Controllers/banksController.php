@@ -8,21 +8,21 @@ use App\Models\banks;
 class banksController extends Controller
 {
     //metodo para la vista de los bancos
-    public function view()
+    public function index()
     {
         $banks = banks::All();
 
-        return view('banks.view', compact('banks'));
+        return view('banks.index', compact('banks'));
     }
 
     //metodo para el formulario de registro del banco
-    public function form()
+    public function create()
     {
-        return view('banks.form');
+        return view('banks.create');
     }
 
     /* metodo para insertar en la db el nuevo banco */
-    protected function create(Request $request)
+    protected function store(Request $request)
     {        
         $banks = $request->validate([
             'name' => ['required', 'string'],
@@ -34,17 +34,17 @@ class banksController extends Controller
         ]);
         
         // Redireccionar a la vista de bancos
-        return redirect()->route('view_banks')->with('success', 'banco Guardado  con exito');
+        return redirect()->route('banks.index')->with('success', 'banco Guardado  con exito');
     }
 
     /* metodo para actualizar un banco */
-    public function form_update(Request $request)
+    public function edit($id)
     {
         $banks = banks::select('*', 'banks.id as banks_id')
-        ->where('banks.id', '=', $request->id)
+        ->where('banks.id', '=', $id)
         ->get();
     
-        return view('banks.update', compact('banks'));
+        return view('banks.edit', compact('banks'));
     }
 
     /* metodo para actualizar un banco */
@@ -58,7 +58,7 @@ class banksController extends Controller
     
         $bank->fill($validatedData);
         $bank->save();
-        return redirect()->route('view_banks')->with('update', 'Banco actualizado con exito');
+        return redirect()->route('banks.index')->with('update', 'Banco actualizado con exito');
     }
 
     /* metodo para eliminar los bancos */

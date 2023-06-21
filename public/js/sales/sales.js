@@ -1,70 +1,43 @@
+import { headerAjax } from '../functions/functions.js';
+
 // obtener el supervisor seleccionado
 const supervisorSelect = document.getElementById('supervisor');
-
 // obtener el bancos seleccionado
 const bankSelect = document.getElementById('banks');
-
 // obtener el tipo de venta seleccionada
 const type_sales_Select = document.getElementById('type_sales');
-
 // obtener la ciudad seleccionada
 const city_Select = document.getElementById('city');
-
 // obtener el barrio seleccionado
 const neighborhoods_Select = document.getElementById('neighborhoods');
-
 // obtener el tipo de inmueble seleccionado
 const property_Select = document.getElementById('property');
-
 // obtener el numero de habitaciones seleccionada
 const number_rooms_Select = document.getElementById('number_rooms');
-
 // obtener el parqueadero seleccionado
 const parking_Select = document.getElementById('parking');
-
 // obtener el cannon seleccionado
-cannon_Select = document.getElementById('cannon');
+const cannon_Select = document.getElementById('cannon');
 
 // Detectar cuando se cambia la opción seleccionada en el select de supervisor
 supervisorSelect.addEventListener('change', () => {
-// Obtener el ID del supervisor seleccionado
+    // Obtener el ID del supervisor seleccionado
     const supervisorId = supervisorSelect.value;
-    
     // Si se seleccionó la opción "Seleccione", vaciar el select de asesor
     if (supervisorId === '0') {
         advisorSelect.innerHTML = '<option value="0">Seleccione</option>';
         return;
     }
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+    headerAjax();
     $.ajax({
         type: "post",
         url: '/get-advisors',
         data: { supervisorId: supervisorId },
         success: function(response) {
-            $('#advisors').html(response);
-            
+            $('#advisors').html(response);   
         }
     }); 
-
-    /* fetch(`/get-advisors/${supervisorId}`)
-    .then(response => response.json())
-    .then(advisors => {
-        const executiveSelect = document.getElementById('executive');
-        executiveSelect.innerHTML = '<option value="0">Seleccione</option>';
-        advisors.forEach(advisor => {
-            const option = document.createElement('option');
-            option.value = advisor.id;
-            option.text = advisor.name;
-            executiveSelect.appendChild(option);
-        });
-    }); */
 });
-
 
 // Detectar cuando se cambia la opción seleccionada en el select de bancos
 bankSelect.addEventListener('change', () => {
@@ -76,19 +49,13 @@ bankSelect.addEventListener('change', () => {
         accountSelect.innerHTML = '<option value="0">Seleccione</option>';
         return;
     }
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+    headerAjax();
     $.ajax({
         type: "post",
         url: '/get-accounts',
         data: { bankId: bankId },
         success: function(response) {
-            $('#accounts').html(response);
-            
+            $('#accounts').html(response); 
         }
     }); 
 });
@@ -145,12 +112,7 @@ type_sales_Select.addEventListener('change', () => {
                                     <option value="1">SI</option>
                                     <option value="2">NO</option>`;
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
+        headerAjax();
         $.ajax({
             type: "post",
             url: '/get_property',
@@ -163,18 +125,12 @@ type_sales_Select.addEventListener('change', () => {
         city_Select.addEventListener('change', () => {
             // Obtener el ID del banco seleccionado
             const cityId = city_Select.value;
-            console.log(cityId);
             
             if (cityId === '0') {
                 neighborhoods_Select.innerHTML = '<option value="0">Seleccione</option>';
                 return;
             }
-        
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+            headerAjax();
             $.ajax({
                 type: "post",
                 url: '/get-neighborhoods',
@@ -183,9 +139,7 @@ type_sales_Select.addEventListener('change', () => {
                     $('#neighborhoods').html(response);    
                 }
             }); 
-
         });
-
     } 
 });
 

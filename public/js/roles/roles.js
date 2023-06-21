@@ -1,40 +1,29 @@
-/* inicializar el modal de inicio automaticamente */
-$(document).ready(function() {
-    // Llamamos al botón del modal y le hacemos clic automáticamente
-    $('#btn-view_roles').trigger('click');
-});
+import { headerAjax } from '../functions/functions.js';
+import { datatables } from '../functions/functions.js';
+
 
 /* modal para el formulario de nuevo rol */
 $(document).ready(function() {
+    var x = "#tbl-roles";
+    datatables(x);
+    
     $('.form-role').click(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
-            url: "/form_roles",
+            url: "/roles/create",
             success: function(response) {
                 $('#form-role #body_form').html(response);
             }
         });
     });
-});
 
-/* modal para el formulario de edicion de rol */
-$(document).ready(function() {
+    /* modal para el formulario de edicion de rol */
     $('.form-update-role').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        console.log(id);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
-            type: "post",
-            url: "/form_update_roles",
-            data: { id: id },
+            type: "get",
+            url: `/roles/${id}/edit`,
             success: function(response) {
                 $('#form-update-role #body_form').html(response);
             }
@@ -46,7 +35,6 @@ $(document).ready(function() {
 $('.btn-delete').click(function (e) {
     e.preventDefault();
     var id = $(this).data('id');
-    console.log(id);
     swal({
         title: "¿Estas Seguro?",
         text: "Una vez eliminado no se puede acceder a la informacion",
@@ -56,26 +44,21 @@ $('.btn-delete').click(function (e) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Usuario Eliminado con Exito!", "success")
-            .then((value) => {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            headerAjax();
+            $.ajax({
+                url: 'roles/' + id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.success) {
+                        swal("Listo!", "Rol Eliminado con Exito!", "success")
+                        .then((value) => {
+                            window.location.replace('/roles'); 
+                            });
+                    } else {
+                        swal('Error!','El rol no pudo ser eliminado.','error');
                     }
-                 });
-                $.ajax({
-                    url: 'delete_roles/' + id,
-                    type: 'DELETE',
-                    success: function (data) {
-                        if (data.success) {
-                            window.location.replace('/view_roles'); 
-                        } else {
-                            swal('Error!','The record could not be deleted.','error');
-                        }
-                    }
-                });
-            }) 
+                }
+            }); 
         }
     });
-    
 });

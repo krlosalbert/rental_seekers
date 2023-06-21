@@ -8,21 +8,21 @@ use App\Models\roles;
 
 class rolesController extends Controller
 {
-    public function read()
+    public function index()
     {
         $roles = roles::All();
 
-        return view('roles.view', compact('roles'));
+        return view('roles.index', compact('roles'));
     }
 
     /* metodo para mostrar el formulario de crear nuevo rol */
-    public function form()
+    public function create()
     {
-        return view('roles.form');
+        return view('roles.create');
     }
 
     /* metodo para insertar en la db el nuevo rol */
-    protected function create(Request $request)
+    protected function store(Request $request)
     {
         
         $roles = $request->validate([
@@ -35,17 +35,17 @@ class rolesController extends Controller
         ]);
         
         // Redireccionar a la vista de roles
-        return redirect()->route('view_roles')->with('success', 'Rol Guardado  con exito');
+        return redirect()->route('roles.index')->with('success', 'Rol Guardado  con exito');
     }
 
     /* metodo para actualizar un rol */
-    public function read_update(Request $request)
+    public function edit($id)
     {
         $roles = roles::select('*', 'roles.id as role_id')
-        ->where('roles.id', '=', $request->id)
+        ->where('roles.id', '=', $id)
         ->get();
     
-        return view('roles.update', compact('roles'));
+        return view('roles.edit', compact('roles'));
     }
 
     /* metodo para actualizar un rol */
@@ -59,7 +59,7 @@ class rolesController extends Controller
     
         $role->fill($validatedData);
         $role->save();
-        return redirect()->route('view_roles')->with('update', 'Rol actualizado con exito');
+        return redirect()->route('roles.index')->with('update', 'Rol actualizado con exito');
     }
 
     /* metodo para eliminar los roles */

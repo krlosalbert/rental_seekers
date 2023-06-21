@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('create_banks') }}">
+<form method="POST" action="{{ route('banks.store') }}">
     @csrf
     <div class="d-flex w-auto">
         <div class="d-inline w-100 p-3">

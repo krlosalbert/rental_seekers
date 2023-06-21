@@ -1,36 +1,31 @@
+import { headerAjax } from '../functions/functions.js';
+import { datatables } from '../functions/functions.js';
+
 //modal para visualizar los detalles de los usuarios
 $(document).ready(function() {
+
+    var x = "#tbl-users";
+    datatables(x);
+    
     $('.details-btn').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
-            type: "post",
-            url: "/details_users",
-            data: { id: id },
+            type: "get",
+            url: "/users/" + id,
             success: function(response) {
                 $('#details-users #body_form').html(response);
             }
         });
     });
-});
 
-//modal para editar los usuarios
-$(document).ready(function() {
+    //modal para editar los usuarios
     $('.update-btn').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             type: "get",
-            url: "/form_update_users",
-            data: { id: id },
+            url: `/users/${id}/edit`,
             success: function(response) {
                 $('#update-users #body_form').html(response);
             }
@@ -42,36 +37,31 @@ $(document).ready(function() {
 $('.btn-delete').click(function (e) {
     e.preventDefault();
     var id = $(this).data('id');
-    console.log(id);
     swal({
         title: "¿Estas Seguro?",
-        text: "Una vez eliminado no se puede acceder a la informacion",
+        text: "El usuario no va a ser eliminado solo va estar en estado inactivo.",
         icon: "warning",
         buttons: true,
         dangerMode: true,
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Usuario Eliminado con Exito!", "success")
-            .then((value) => {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            headerAjax();
+            $.ajax({
+                url: 'users/' + id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.success) {
+                        swal("Listo!", "Usuario fue inactivado con Exito!", "success")
+                        .then((value) => {
+                            window.location.replace('/users'); 
+                        }) 
+                    } else {
+                        swal('Error!','El usuario no pudo ser inactivado.','error');
                     }
-                 });
-                $.ajax({
-                    url: 'delete_users/' + id,
-                    type: 'DELETE',
-                    success: function (data) {
-                        if (data.success) {
-                            window.location.replace('/view_users'); 
-                        } else {
-                            swal('Error!','The record could not be deleted.','error');
-                        }
-                    }
-                });
-            }) 
+                }
+            });
+            
         }
     });
-    
 });

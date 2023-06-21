@@ -1,40 +1,29 @@
-/* inicializar el modal de inicio automaticamente */
-$(document).ready(function() {
-    // Llamamos al botón del modal y le hacemos clic automáticamente
-    $('#btn-view_banks').trigger('click');
-});
+import { headerAjax } from '../functions/functions.js';
+import { datatables } from '../functions/functions.js';
 
-/* modal para el formulario de nuevo banco */
 $(document).ready(function() {
+    
+    var x = "#tbl-banks";
+    datatables(x);
+    
+    /* modal para el formulario de nuevo banco */
     $('.form-banks').click(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
-            url: "/form_banks",
+            url: "/banks/create",
             success: function(response) {
                 $('#form-banks #body_form').html(response);
             }
         });
     });
-});
 
-/* modal para el formulario de edicion del banco seleccionado */
-$(document).ready(function() {
+    /* modal para el formulario de edicion del banco seleccionado */
     $('.form-update-banks').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        console.log(id);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
-            type: "post",
-            url: "/form_update_banks",
-            data: { id: id },
+            type: "get",
+            url: `/banks/${id}/edit`,
             success: function(response) {
                 $('#form-update-banks #body_form').html(response);
             }
@@ -46,7 +35,6 @@ $(document).ready(function() {
 $('.btn-delete').click(function (e) {
     e.preventDefault();
     var id = $(this).data('id');
-    console.log(id);
     swal({
         title: "¿Estas Seguro?",
         text: "Una vez eliminado no se puede acceder a la informacion",
@@ -56,25 +44,21 @@ $('.btn-delete').click(function (e) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Banco Eliminado con Exito!", "success")
-            .then((value) => {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            headerAjax();
+            $.ajax({
+                url: 'banks/' + id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.success) {
+                        swal("Listo!", "Banco Eliminado con Exito!", "success")
+                        .then((value) => {
+                            window.location.replace('/banks'); 
+                        });
+                    } else {
+                        swal('Error!','El banco no se pudo ser eliminado.','error');
                     }
-                 });
-                $.ajax({
-                    url: 'delete_banks/' + id,
-                    type: 'DELETE',
-                    success: function (data) {
-                        if (data.success) {
-                            window.location.replace('/view_banks'); 
-                        } else {
-                            swal('Error!','El banco no se pudo borrar.','error');
-                        }
-                    }
-                });
-            }) 
+                }
+            });
         }
     });
     

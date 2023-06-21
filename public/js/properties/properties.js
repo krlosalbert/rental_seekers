@@ -1,17 +1,14 @@
-/* inicializar el modal de inicio automaticamente */
-$(document).ready(function() {
-    // Llamamos al botón del modal y le hacemos clic automáticamente
-    $('#btn-view_properties').trigger('click');
-});
+import { headerAjax } from '../functions/functions.js';
+import { datatables } from '../functions/functions.js';
 
 /* modal para el formulario de nuevo inmueble */
 $(document).ready(function() {
+
+    var x = "#tbl-properties";
+    datatables(x);
+
     $('.form-properties').click(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             url: "/properties/create",
             success: function(response) {
@@ -19,17 +16,11 @@ $(document).ready(function() {
             }
         });
     });
-});
 
-/* modal para el formulario de edicion de la propiedad seleccionada */
-$(document).ready(function() {
+    /* modal para el formulario de edicion de la propiedad seleccionada */
     $('.form-update-properties').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             type: "get",
             url: `properties/${id}/edit`,
@@ -44,7 +35,6 @@ $(document).ready(function() {
 $('.btn-delete').click(function (e) {
     e.preventDefault();
     var id = $(this).data('id');
-    console.log(id);
     swal({
         title: "¿Estas Seguro?",
         text: "Una vez eliminado no se puede acceder a la informacion",
@@ -54,26 +44,21 @@ $('.btn-delete').click(function (e) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Inmueble Eliminado con Exito!", "success")
-            .then((value) => {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                 });
-                $.ajax({
-                    url: '/properties/' + id,
-                    type: 'DELETE',
-                    success: function (data) {
-                        if (data.success) {
+            headerAjax();
+            $.ajax({
+                url: '/properties/' + id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.success) {
+                        swal("Listo!", "Inmueble Eliminado con Exito!", "success")
+                        .then((value) => {
                             window.location.replace('/properties'); 
-                        } else {
-                            swal('Error!','La ciudad no se pudo borrar.','error');
-                        }
+                        });
+                    } else {
+                        swal('Error!','La ciudad no se pudo ser eliminada.','error');
                     }
-                });
-            }) 
+                }
+            });
         }
     });
-    
 });

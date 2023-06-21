@@ -8,7 +8,7 @@
                 <div class="card-header" id="head_form"><h3>{{ __('Registrar Ventas') }}</h3></div>
 
                 <div class="card-body" id="body_form">
-                    <form method="POST" action="{{ route('create_sales') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('sales.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="d-flex w-auto">
                             @if(!empty($customers))
@@ -274,12 +274,10 @@
                     </form>
                 </div>
 
-                <script src="{{ asset('js/sales/sales.js') }}"></script>
+                <script type="module" src="{{ asset('js/sales/sales.js') }}"></script>
                 @if(session('success'))
                     <script>
                         swal("Listo!", "Venta Guardada con Exito!", "success")
-                            .then((value) => {
-                        }) 
                     </script>
                 @endif
             </div>

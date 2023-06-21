@@ -1,17 +1,14 @@
-/* inicializar el modal de inicio automaticamente */
-$(document).ready(function() {
-    // Llamamos al botón del modal y le hacemos clic automáticamente
-    $('#btn-view_services').trigger('click');
-});
+import { headerAjax } from '../functions/functions.js';
+import { datatables } from '../functions/functions.js';
 
-/* modal para el formulario de nuevo servicio */
 $(document).ready(function() {
+
+    var x = "#tbl-services";
+    datatables(x);
+
+    /* modal para el formulario de nuevo servicio */
     $('.form-services').click(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             url: "/services/create",
             success: function(response) {
@@ -19,17 +16,11 @@ $(document).ready(function() {
             }
         });
     });
-});
 
-/* modal para el formulario de edicion de el servicio seleccionado */
-$(document).ready(function() {
+    /* modal para el formulario de edicion de el servicio seleccionado */
     $('.form-update-services').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             type: "get",
             url: `services/${id}/edit`,
@@ -53,26 +44,21 @@ $('.btn-delete').click(function (e) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Servicio Eliminado con Exito!", "success")
-            .then((value) => {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                 });
-                $.ajax({
-                    url: '/services/' + id,
-                    type: 'DELETE',
-                    success: function (data) {
-                        if (data.success) {
+            headerAjax();
+            $.ajax({
+                url: '/services/' + id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.success) {
+                        swal("Listo!", "Servicio Eliminado con Exito!", "success")
+                        .then((value) => {
                             window.location.replace('/services'); 
-                        } else {
-                            swal('Error!','El servicio no se pudo borrar.','error');
-                        }
+                        });
+                    } else {
+                        swal('Error!','El servicio no se pudo borrar.','error');
                     }
-                });
-            }) 
-        }
+                }
+            });
+        } 
     });
-    
 });

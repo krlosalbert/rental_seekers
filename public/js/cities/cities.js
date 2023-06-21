@@ -1,17 +1,14 @@
-/* inicializar el modal de inicio automaticamente */
-$(document).ready(function() {
-    // Llamamos al botón del modal y le hacemos clic automáticamente
-    $('#btn-view_cities').trigger('click');
-});
+import { headerAjax } from '../functions/functions.js';
+import { datatables } from '../functions/functions.js';
 
-/* modal para el formulario de nuevo ciudad */
 $(document).ready(function() {
+    
+    var x = "#tbl-cities";
+    datatables(x);
+    
+    /* modal para el formulario de nuevo ciudad */
     $('.form-cities').click(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             url: "/cities/create",
             success: function(response) {
@@ -19,17 +16,11 @@ $(document).ready(function() {
             }
         });
     });
-});
 
-/* modal para el formulario de edicion de la ciudad seleccionada */
-$(document).ready(function() {
+    /* modal para el formulario de edicion de la ciudad seleccionada */
     $('.form-update-cities').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             type: "get",
             url: `cities/${id}/edit`,
@@ -44,7 +35,6 @@ $(document).ready(function() {
 $('.btn-delete').click(function (e) {
     e.preventDefault();
     var id = $(this).data('id');
-    console.log(id);
     swal({
         title: "¿Estas Seguro?",
         text: "Una vez eliminado no se puede acceder a la informacion",
@@ -54,26 +44,21 @@ $('.btn-delete').click(function (e) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            swal("Listo!", "Ciudad Eliminada con Exito!", "success")
-            .then((value) => {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                 });
-                $.ajax({
-                    url: '/cities/' + id,
-                    type: 'DELETE',
-                    success: function (data) {
-                        if (data.success) {
+            headerAjax();
+            $.ajax({
+                url: '/cities/' + id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.success) {
+                        swal("Listo!", "Ciudad Eliminada con Exito!", "success")
+                        .then((value) => {
                             window.location.replace('/cities'); 
-                        } else {
-                            swal('Error!','La ciudad no se pudo borrar.','error');
-                        }
+                        });
+                    } else {
+                        swal('Error!','La ciudad no se pudo ser eliminada.','error');
                     }
-                });
-            }) 
+                }
+            });
         }
     });
-    
 });

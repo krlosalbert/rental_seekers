@@ -15,12 +15,10 @@ use App\Models\sales;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-
-
 class salesController extends Controller
 {
     //metodo para ver las ventas registradas en la db
-    public function view(){
+    public function index(){
         
         //instancio la clase para traer las ventas
         $sales = sales::select('*', 'sales.id as sale_id', 'services.name as service', 'users.name as advisor', 'sales.service_id as service_number')
@@ -29,11 +27,11 @@ class salesController extends Controller
         ->join('users', 'advisors.user_id', '=', 'users.id')
         ->get();
         //retono la variable a la vista
-        return view('sales.view', compact('sales'));
+        return view('sales.index', compact('sales'));
     }
 
     //metodo para ver los detalles de la venta
-    public function details_sales(Request $request)
+    public function show(Request $request)
     {
         //pregunto si es un servicio personalizado
         if($request->service == 2)
@@ -105,11 +103,11 @@ class salesController extends Controller
             //recorro el array de supervisor para poder mandarlo a la vista
             foreach($supervisors as $supervisor){}
         }
-        return view('sales.details_sales', compact('sale', 'supervisor'));
+        return view('sales.show', compact('sale', 'supervisor'));
     }
 
     //metodo para el formulario de ventas
-    public function form()
+    public function create()
     {
         $cities = cities::All();
         $supervisors = supervisors::select('*', 'supervisors.id as supervisor_id','users.name as name', 'users.lastname as lastname')
@@ -118,7 +116,7 @@ class salesController extends Controller
         $banks = banks::All();
         //dd($customers);
         //retorno los datos obtenidos a la vista
-        return view('sales.form', compact('cities', 'supervisors', 'banks'));
+        return view('sales.create', compact('cities', 'supervisors', 'banks'));
     }
 
     /* metodo para obtener los barrios dependiendo de la ciudad seleccionada */
@@ -159,7 +157,7 @@ class salesController extends Controller
     }
 
     /* metodo para crear una nueva venta */
-    public function create(Request $request)
+    public function store(Request $request)
     {
         //asigno a la variable la fecha actual
         $date = Carbon::now();
@@ -240,7 +238,7 @@ class salesController extends Controller
                 ]);
                 
                 // Redireccionar al formulario
-                return redirect()->route('view_sales')->with('sale_special', 'venta registrada con exito');
+                return redirect()->route('sales.index')->with('sale_special', 'venta registrada con exito');
 
             }else{
 
@@ -261,7 +259,7 @@ class salesController extends Controller
                     ]);
 
                     // Redireccionar al formulario
-                    return redirect()->route('view_sales')->with('sale_general', 'venta registrada con exito');
+                    return redirect()->route('sales.index')->with('sale_general', 'venta registrada con exito');
 
                 }else{
 
@@ -269,7 +267,7 @@ class salesController extends Controller
                     if ($request->type_sales == 0 ){  
                         
                         //redirecciono con un mensaje de error
-                        return redirect()->route('form_sales')->with('success', 'venta registrada con exito');
+                        return redirect()->route('sales.create')->with('success', 'venta registrada con exito');
                     }
                 }//fin del segundo condicional de venta general
             }//fin del primer condicional de venta personalizada
@@ -317,7 +315,7 @@ class salesController extends Controller
                 ]);
 
                 // Redireccionar al formulario
-                return redirect()->route('view_sales')->with('sale_special', 'venta registrada con exito');
+                return redirect()->route('sales.index')->with('sale_special', 'venta registrada con exito');
             }else{
                // pregunto si es un tipo de venta general
                if ($request->type_sales == 1 ){
@@ -336,12 +334,12 @@ class salesController extends Controller
                     ]);
 
                     // Redireccionar al formulario
-                    return redirect()->route('view_sales')->with('sale_general', 'venta registrada con exito');
+                    return redirect()->route('sales.index')->with('sale_general', 'venta registrada con exito');
                 }else{
 
                     if ($request->type_sales == 0 ){
                         // Redireccionar al formulario
-                        return redirect()->route('form_sales')->with('success', 'venta registrada con exito');
+                        return redirect()->route('sales.create')->with('success', 'venta registrada con exito');
                     }
                 }//fin del segundo condicional de venta general
             }//fin del primer condicional de venta personalizada

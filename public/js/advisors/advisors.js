@@ -1,12 +1,15 @@
-//modal para visualizar los detalles de las ventas
-$(document).ready(function() {    
+import { headerAjax } from '../functions/functions.js';
+import { datatables } from '../functions/functions.js';
+
+$(document).ready(function() {
+    
+    var x = "#tbl-advisors";
+    datatables(x);
+    
+    /* modal para el formulario de nuevo asesor*/
     $('.show_sales-btn').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             type: "get",
             url: "/advisors/" + id,
@@ -15,17 +18,11 @@ $(document).ready(function() {
             }
         });
     });
-});
 
-/* modal para el formulario de edicion modificar el supervisor del asesor seleccionado */
-$(document).ready(function() {
+    /* modal para el formulario de edicion modificar el supervisor del asesor seleccionado */
     $('.form_update-advisors').click(function() {
         var id = $(this).closest('button').data('id'); // obtener el valor de "data-id"
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        headerAjax();
         $.ajax({
             type: "get",
             url: `/advisors/${id}/edit`,

@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('create_roles') }}">
+<form method="POST" action="{{ route('roles.store') }}">
     @csrf
     <div class="d-flex w-auto">
         <div class="d-inline w-100 p-3">

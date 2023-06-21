@@ -14,15 +14,14 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body" id="body_form">
-
                     <div class="d-flex w-auto">
                         <div class="d-inline w-100 ">
                             <input type="text" name="search" class="form-control" id="search" placeholder="Buscar...">
                         </div>
                         <div class="row mb-0">
                             <div>
-                                <button class="btn btn-primary" id="buscar-btn" data-toggle="modal" data-target="#searchs-customers">
-                                <b> {{ __('Buscar') }} </b>
+                                <button class="btn btn-primary" id="buscar-btn">
+                                    <b> {{ __('Buscar') }} </b>
                                 </button>
                             </div>
                         </div>
@@ -48,5 +47,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/customers/customers.js') }}"></script>
+    <script type="module" src="{{ asset('js/customers/customers.js') }}"></script>
 @endsection
